@@ -1,0 +1,1152 @@
+[
+  {
+    "g4dn.12xlarge": "5.2810000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "g4dn.16xlarge": "5.8750000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "g4dn.2xlarge": "1.0150000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "g4dn.4xlarge": "1.6250000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "g4dn.8xlarge": "2.9380000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "g4dn.metal": "10.5620000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "g4dn.xlarge": "0.7100000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "g5.12xlarge": "8.2260900000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "g5.16xlarge": "5.9404200000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "g5.24xlarge": "11.8112300000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "g5.2xlarge": "1.7577600000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "g5.48xlarge": "23.6224600000",
+    "vcpu": "192",
+    "memory": "768 GiB"
+  },
+  {
+    "g5.4xlarge": "2.3552800000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "g5.8xlarge": "3.5503300000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "g5.xlarge": "1.4590000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "p3.16xlarge": "33.5520000000",
+    "vcpu": "64",
+    "memory": "488 GiB"
+  },
+  {
+    "p3.2xlarge": "4.1940000000",
+    "vcpu": "8",
+    "memory": "61 GiB"
+  },
+  {
+    "p3.8xlarge": "16.7760000000",
+    "vcpu": "32",
+    "memory": "244 GiB"
+  },
+  {
+    "p3dn.24xlarge": "42.7830000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "p4d.24xlarge": "44.9221500000",
+    "vcpu": "96",
+    "memory": "1152 GiB"
+  },
+  {
+    "t3.2xlarge": "0.4352000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "t3a.2xlarge": "0.3917000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "t3a.xlarge": "0.1958000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "t3.xlarge": "0.2176000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "c5.12xlarge": "2.5680000000",
+    "vcpu": "48",
+    "memory": "96 GiB"
+  },
+  {
+    "c5.18xlarge": "3.8520000000",
+    "vcpu": "72",
+    "memory": "144 GiB"
+  },
+  {
+    "c5.24xlarge": "5.1360000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c5.2xlarge": "0.4280000000",
+    "vcpu": "8",
+    "memory": "16 GiB"
+  },
+  {
+    "c5.4xlarge": "0.8560000000",
+    "vcpu": "16",
+    "memory": "32 GiB"
+  },
+  {
+    "c5.9xlarge": "1.9260000000",
+    "vcpu": "36",
+    "memory": "72 GiB"
+  },
+  {
+    "c5a.12xlarge": "2.3040000000",
+    "vcpu": "48",
+    "memory": "96 GiB"
+  },
+  {
+    "c5a.16xlarge": "3.0720000000",
+    "vcpu": "64",
+    "memory": "128 GiB"
+  },
+  {
+    "c5a.24xlarge": "4.6080000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c5a.2xlarge": "0.3840000000",
+    "vcpu": "8",
+    "memory": "16 GiB"
+  },
+  {
+    "c5a.4xlarge": "0.7680000000",
+    "vcpu": "16",
+    "memory": "32 GiB"
+  },
+  {
+    "c5a.8xlarge": "1.5360000000",
+    "vcpu": "32",
+    "memory": "64 GiB"
+  },
+  {
+    "c5a.xlarge": "0.1920000000",
+    "vcpu": "4",
+    "memory": "8 GiB"
+  },
+  {
+    "c5d.12xlarge": "2.9280000000",
+    "vcpu": "48",
+    "memory": "96 GiB"
+  },
+  {
+    "c5d.18xlarge": "4.3920000000",
+    "vcpu": "72",
+    "memory": "144 GiB"
+  },
+  {
+    "c5d.24xlarge": "5.8560000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c5d.2xlarge": "0.4880000000",
+    "vcpu": "8",
+    "memory": "16 GiB"
+  },
+  {
+    "c5d.4xlarge": "0.9760000000",
+    "vcpu": "16",
+    "memory": "32 GiB"
+  },
+  {
+    "c5d.9xlarge": "2.1960000000",
+    "vcpu": "36",
+    "memory": "72 GiB"
+  },
+  {
+    "c5d.metal": "5.8560000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c5d.xlarge": "0.2440000000",
+    "vcpu": "4",
+    "memory": "8 GiB"
+  },
+  {
+    "c5.metal": "5.1360000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c5n.metal": "4.8960000000",
+    "vcpu": "72",
+    "memory": "192 GiB"
+  },
+  {
+    "c5.xlarge": "0.2140000000",
+    "vcpu": "4",
+    "memory": "8 GiB"
+  },
+  {
+    "c6a.metal": "9.2448000000",
+    "vcpu": "192",
+    "memory": "384 GiB"
+  },
+  {
+    "c6i.12xlarge": "2.5680000000",
+    "vcpu": "48",
+    "memory": "96 GiB"
+  },
+  {
+    "c6i.16xlarge": "3.4240000000",
+    "vcpu": "64",
+    "memory": "128 GiB"
+  },
+  {
+    "c6i.24xlarge": "5.1360000000",
+    "vcpu": "96",
+    "memory": "192 GiB"
+  },
+  {
+    "c6i.2xlarge": "0.4280000000",
+    "vcpu": "8",
+    "memory": "16 GiB"
+  },
+  {
+    "c6i.32xlarge": "6.8480000000",
+    "vcpu": "128",
+    "memory": "256 GiB"
+  },
+  {
+    "c6i.4xlarge": "0.8560000000",
+    "vcpu": "16",
+    "memory": "32 GiB"
+  },
+  {
+    "c6i.8xlarge": "1.7120000000",
+    "vcpu": "32",
+    "memory": "64 GiB"
+  },
+  {
+    "c6i.metal": "6.8480000000",
+    "vcpu": "128",
+    "memory": "256 GiB"
+  },
+  {
+    "c6i.xlarge": "0.2140000000",
+    "vcpu": "4",
+    "memory": "8 GiB"
+  },
+  {
+    "m5zn.12xlarge": "5.1204000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5zn.2xlarge": "0.8534000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5zn.3xlarge": "1.2801000000",
+    "vcpu": "12",
+    "memory": "48 GiB"
+  },
+  {
+    "m5zn.6xlarge": "2.5602000000",
+    "vcpu": "24",
+    "memory": "96 GiB"
+  },
+  {
+    "m5zn.xlarge": "0.4267000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "m5.12xlarge": "2.9760000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5.16xlarge": "3.9680000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5.24xlarge": "5.9520000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5.2xlarge": "0.4960000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5.4xlarge": "0.9920000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5.8xlarge": "1.9840000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5a.12xlarge": "2.6880000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5a.16xlarge": "3.5840000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5a.24xlarge": "5.3760000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5a.2xlarge": "0.4480000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5a.4xlarge": "0.8960000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5a.8xlarge": "1.7920000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5a.xlarge": "0.2240000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "m5d.metal": "7.0080000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5dn.metal": "8.4000000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5.metal": "5.9520000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5n.metal": "7.3440000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5.xlarge": "0.2480000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "m5zn.metal": "5.1204000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m6a.metal": "10.7136000000",
+    "vcpu": "192",
+    "memory": "768 GiB"
+  },
+  {
+    "m6i.12xlarge": "2.9760000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m6i.16xlarge": "3.9680000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m6i.24xlarge": "5.9520000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m6i.2xlarge": "0.4960000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m6i.32xlarge": "7.9360000000",
+    "vcpu": "128",
+    "memory": "512 GiB"
+  },
+  {
+    "m6i.4xlarge": "0.9920000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m6i.8xlarge": "1.9840000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m6i.metal": "7.9360000000",
+    "vcpu": "128",
+    "memory": "512 GiB"
+  },
+  {
+    "m6i.xlarge": "0.2480000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "r4.16xlarge": "5.1200000000",
+    "vcpu": "64",
+    "memory": "488 GiB"
+  },
+  {
+    "r4.2xlarge": "0.6400000000",
+    "vcpu": "8",
+    "memory": "61 GiB"
+  },
+  {
+    "r4.4xlarge": "1.2800000000",
+    "vcpu": "16",
+    "memory": "122 GiB"
+  },
+  {
+    "r4.8xlarge": "2.5600000000",
+    "vcpu": "32",
+    "memory": "244 GiB"
+  },
+  {
+    "r4.xlarge": "0.3200000000",
+    "vcpu": "4",
+    "memory": "30.5 GiB"
+  },
+  {
+    "r5.12xlarge": "3.6480000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5.16xlarge": "4.8640000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5.24xlarge": "7.2960000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5.2xlarge": "0.6080000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5.4xlarge": "1.2160000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5.8xlarge": "2.4320000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5a.12xlarge": "3.2880000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5a.16xlarge": "4.3840000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5a.24xlarge": "6.5760000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5a.2xlarge": "0.5480000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5a.4xlarge": "1.0960000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5a.8xlarge": "2.1920000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5ad.12xlarge": "3.8160000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5ad.16xlarge": "5.0880000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5ad.24xlarge": "7.6320000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5ad.2xlarge": "0.6360000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5ad.4xlarge": "1.2720000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5ad.8xlarge": "2.5440000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5ad.xlarge": "0.3180000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r5a.xlarge": "0.2740000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r5d.12xlarge": "4.1760000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5d.16xlarge": "5.5680000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5d.24xlarge": "8.3520000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5d.2xlarge": "0.6960000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5d.4xlarge": "1.3920000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5d.8xlarge": "2.7840000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5d.metal": "8.3520000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5dn.12xlarge": "4.8720000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5dn.16xlarge": "6.4960000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5dn.24xlarge": "9.7440000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5dn.2xlarge": "0.8120000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5dn.4xlarge": "1.6240000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5dn.8xlarge": "3.2480000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5dn.metal": "9.7440000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5dn.xlarge": "0.4060000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r5d.xlarge": "0.3480000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r5.metal": "7.2960000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5n.12xlarge": "4.3440000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r5n.16xlarge": "5.7920000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r5n.24xlarge": "8.6880000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5n.2xlarge": "0.7240000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r5n.4xlarge": "1.4480000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r5n.8xlarge": "2.8960000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r5n.metal": "8.6880000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r5n.xlarge": "0.3620000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r5.xlarge": "0.3040000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "r6i.12xlarge": "3.6480000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "r6i.16xlarge": "4.8640000000",
+    "vcpu": "64",
+    "memory": "512 GiB"
+  },
+  {
+    "r6i.24xlarge": "7.2960000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "r6i.2xlarge": "0.6080000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "r6i.32xlarge": "9.7280000000",
+    "vcpu": "128",
+    "memory": "1024 GiB"
+  },
+  {
+    "r6i.4xlarge": "1.2160000000",
+    "vcpu": "16",
+    "memory": "128 GiB"
+  },
+  {
+    "r6i.8xlarge": "2.4320000000",
+    "vcpu": "32",
+    "memory": "256 GiB"
+  },
+  {
+    "r6i.metal": "9.7280000000",
+    "vcpu": "128",
+    "memory": "1024 GiB"
+  },
+  {
+    "r6i.xlarge": "0.3040000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "x1.16xlarge": "9.6710000000",
+    "vcpu": "64",
+    "memory": "976 GiB"
+  },
+  {
+    "x1.32xlarge": "19.3410000000",
+    "vcpu": "128",
+    "memory": "1952 GiB"
+  },
+  {
+    "x1e.16xlarge": "19.3440000000",
+    "vcpu": "64",
+    "memory": "1952 GiB"
+  },
+  {
+    "x1e.2xlarge": "2.4180000000",
+    "vcpu": "8",
+    "memory": "244 GiB"
+  },
+  {
+    "x1e.32xlarge": "38.6880000000",
+    "vcpu": "128",
+    "memory": "3904 GiB"
+  },
+  {
+    "x1e.4xlarge": "4.8360000000",
+    "vcpu": "16",
+    "memory": "488 GiB"
+  },
+  {
+    "x1e.8xlarge": "9.6720000000",
+    "vcpu": "32",
+    "memory": "976 GiB"
+  },
+  {
+    "x1e.xlarge": "1.2090000000",
+    "vcpu": "4",
+    "memory": "122 GiB"
+  },
+  {
+    "x2idn.16xlarge": "9.6705000000",
+    "vcpu": "64",
+    "memory": "1024 GiB"
+  },
+  {
+    "x2idn.24xlarge": "14.5057500000",
+    "vcpu": "96",
+    "memory": "1536 GiB"
+  },
+  {
+    "x2idn.32xlarge": "19.3410000000",
+    "vcpu": "128",
+    "memory": "2048 GiB"
+  },
+  {
+    "x2idn.metal": "19.3410000000",
+    "vcpu": "128",
+    "memory": "2048 GiB"
+  },
+  {
+    "x2iedn.16xlarge": "19.3410000000",
+    "vcpu": "64",
+    "memory": "2048 GiB"
+  },
+  {
+    "x2iedn.24xlarge": "29.0115000000",
+    "vcpu": "96",
+    "memory": "3072 GiB"
+  },
+  {
+    "x2iedn.2xlarge": "2.4176300000",
+    "vcpu": "8",
+    "memory": "256 GiB"
+  },
+  {
+    "x2iedn.32xlarge": "38.6820000000",
+    "vcpu": "128",
+    "memory": "4096 GiB"
+  },
+  {
+    "x2iedn.4xlarge": "4.8352500000",
+    "vcpu": "16",
+    "memory": "512 GiB"
+  },
+  {
+    "x2iedn.8xlarge": "9.6705000000",
+    "vcpu": "32",
+    "memory": "1024 GiB"
+  },
+  {
+    "x2iedn.metal": "38.6820000000",
+    "vcpu": "128",
+    "memory": "4096 GiB"
+  },
+  {
+    "x2iedn.xlarge": "1.2088100000",
+    "vcpu": "4",
+    "memory": "128 GiB"
+  },
+  {
+    "x2iezn.12xlarge": "14.5080000000",
+    "vcpu": "48",
+    "memory": "1536 GiB"
+  },
+  {
+    "x2iezn.2xlarge": "2.4180000000",
+    "vcpu": "8",
+    "memory": "256 GiB"
+  },
+  {
+    "x2iezn.4xlarge": "4.8360000000",
+    "vcpu": "16",
+    "memory": "512 GiB"
+  },
+  {
+    "x2iezn.6xlarge": "7.2540000000",
+    "vcpu": "24",
+    "memory": "768 GiB"
+  },
+  {
+    "x2iezn.8xlarge": "9.6720000000",
+    "vcpu": "32",
+    "memory": "1024 GiB"
+  },
+  {
+    "x2iezn.metal": "14.5080000000",
+    "vcpu": "48",
+    "memory": "1536 GiB"
+  },
+  {
+    "z1d.12xlarge": "5.4480000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "z1d.2xlarge": "0.9080000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "z1d.3xlarge": "1.3620000000",
+    "vcpu": "12",
+    "memory": "96 GiB"
+  },
+  {
+    "z1d.6xlarge": "2.7240000000",
+    "vcpu": "24",
+    "memory": "192 GiB"
+  },
+  {
+    "z1d.metal": "5.4480000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "z1d.xlarge": "0.4540000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "c5n.18xlarge": "4.8960000000",
+    "vcpu": "72",
+    "memory": "192 GiB"
+  },
+  {
+    "c5n.2xlarge": "0.5440000000",
+    "vcpu": "8",
+    "memory": "21 GiB"
+  },
+  {
+    "c5n.4xlarge": "1.0880000000",
+    "vcpu": "16",
+    "memory": "42 GiB"
+  },
+  {
+    "c5n.9xlarge": "2.4480000000",
+    "vcpu": "36",
+    "memory": "96 GiB"
+  },
+  {
+    "c5n.xlarge": "0.2720000000",
+    "vcpu": "4",
+    "memory": "10.5 GiB"
+  },
+  {
+    "m5dn.12xlarge": "4.2000000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5dn.16xlarge": "5.6000000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5dn.24xlarge": "8.4000000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5dn.2xlarge": "0.7000000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5dn.4xlarge": "1.4000000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5dn.8xlarge": "2.8000000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5dn.xlarge": "0.3500000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "m5n.12xlarge": "3.6720000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5n.16xlarge": "4.8960000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5n.24xlarge": "7.3440000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5n.2xlarge": "0.6120000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5n.4xlarge": "1.2240000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5n.8xlarge": "2.4480000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5n.xlarge": "0.3060000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "i3.16xlarge": "5.8560000000",
+    "vcpu": "64",
+    "memory": "488 GiB"
+  },
+  {
+    "i3.2xlarge": "0.7320000000",
+    "vcpu": "8",
+    "memory": "61 GiB"
+  },
+  {
+    "i3.4xlarge": "1.4640000000",
+    "vcpu": "16",
+    "memory": "122 GiB"
+  },
+  {
+    "i3.8xlarge": "2.9280000000",
+    "vcpu": "32",
+    "memory": "244 GiB"
+  },
+  {
+    "i3en.12xlarge": "6.3840000000",
+    "vcpu": "48",
+    "memory": "384 GiB"
+  },
+  {
+    "i3en.24xlarge": "12.7680000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "i3en.2xlarge": "1.0640000000",
+    "vcpu": "8",
+    "memory": "64 GiB"
+  },
+  {
+    "i3en.3xlarge": "1.5960000000",
+    "vcpu": "12",
+    "memory": "96 GiB"
+  },
+  {
+    "i3en.6xlarge": "3.1920000000",
+    "vcpu": "24",
+    "memory": "192 GiB"
+  },
+  {
+    "i3en.metal": "12.7680000000",
+    "vcpu": "96",
+    "memory": "768 GiB"
+  },
+  {
+    "i3en.xlarge": "0.5320000000",
+    "vcpu": "4",
+    "memory": "32 GiB"
+  },
+  {
+    "i3.metal": "5.8560000000",
+    "vcpu": "72",
+    "memory": "512 GiB"
+  },
+  {
+    "i3.xlarge": "0.3660000000",
+    "vcpu": "4",
+    "memory": "30.5 GiB"
+  },
+  {
+    "m5ad.12xlarge": "3.2160000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5ad.16xlarge": "4.2880000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5ad.24xlarge": "6.4320000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5ad.2xlarge": "0.5360000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5ad.4xlarge": "1.0720000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5ad.8xlarge": "2.1440000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5ad.xlarge": "0.2680000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  },
+  {
+    "m5d.12xlarge": "3.5040000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "m5d.16xlarge": "4.6720000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  {
+    "m5d.24xlarge": "7.0080000000",
+    "vcpu": "96",
+    "memory": "384 GiB"
+  },
+  {
+    "m5d.2xlarge": "0.5840000000",
+    "vcpu": "8",
+    "memory": "32 GiB"
+  },
+  {
+    "m5d.4xlarge": "1.1680000000",
+    "vcpu": "16",
+    "memory": "64 GiB"
+  },
+  {
+    "m5d.8xlarge": "2.3360000000",
+    "vcpu": "32",
+    "memory": "128 GiB"
+  },
+  {
+    "m5d.xlarge": "0.2920000000",
+    "vcpu": "4",
+    "memory": "16 GiB"
+  }
+]

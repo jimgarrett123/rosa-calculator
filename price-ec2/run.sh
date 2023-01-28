@@ -13,13 +13,16 @@ function get_price() {
     PRICE_REGION=$1
     EC2_TYPES=$2
 
-    OUT_FILE="out/$PRICE_REGION-ondemand.json"
-    python3 prices.py -r "$PRICE_REGION" -e "${EC2_TYPES}" -c JRTCKXETXF > "${OUT_FILE}"
+    # OUT_FILE="out/$PRICE_REGION-ondemand.json"
+    # python3 prices.py -r "$PRICE_REGION" -e "${EC2_TYPES}" -c JRTCKXETXF > "${OUT_FILE}"
+    # jq . "${OUT_FILE}" > temp && mv temp "${OUT_FILE}"
+    # echo  "[${PRICE_REGION}] output file: ${OUT_FILE}"
+    sleep 5
+
+    OUT_FILE="out/$PRICE_REGION-1year.json"
+    python3 prices.py -r "$PRICE_REGION" -e "${EC2_TYPES}" -c 6QCMYABX3D > "${OUT_FILE}"
     jq . "${OUT_FILE}" > temp && mv temp "${OUT_FILE}"
     echo  "[${PRICE_REGION}] output file: ${OUT_FILE}"
-    sleep 5
-    # python3 prices.py -r "$PRICE_REGION" -e m5.xlarge,r5.2xlarge,r5.4xlarge,m5.2xlarge,r5.xlarge,m5.2xlarge -c 6QCMYABX3D > "out/$PRICE_REGION-1year.json"
-    # echo $(pwd)/"$PRICE_REGION-1year.json"
 }
 rosa list instance-types -o json | jq -r ".[].id" > data/rosa-ec2.json
 ROSA_EC2_TYPES_DATA=$(cat data/rosa-ec2.json)

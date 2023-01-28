@@ -1,41 +1,92 @@
+# EC2 Prices
+
+Retrieves EC2 prices for the EC2 instance types supported by Red Hat OpenShift Service on AWS (ROSA).
+
+The prices are retrieved from the [AWS Price List API](https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html).
+
 ## Usage
 
-```
+### Option 1: retrieve all on-demand and 1 year EC2 prices for all regions
+
+Prerequisites: Python 3, [rosa CLI](https://docs.openshift.com/rosa/rosa_cli/rosa-get-started-cli.html), `jq`
+
+```bash
 bash run.sh
 ```
 
-Update script with list of regions names as needed:
+- The rosa CLI is used to retrieve the list of supported instance types - see [data/rosa-ec2.json](data/rosa-ec2.json)
+- The list of all regions is stored in [data/regions.json](data/regions.json)
+- The EC2 prices last updated time is kept in the [out/info.json](out/info.json) for future reference
+- The EC2 prices are stored in JSON files in the [out folder](out/) as per the following example of output:
 
-US East (Ohio) us-east-2
-US East (N. Virginia) us-east-1
-US West (N. California) us-west-1
-US West (Oregon) us-west-2
-Africa (Cape Town) af-south-1
-Asia Pacific (Hong Kong) ap-east-1
-Asia Pacific (Hyderabad) ap-south-2
-Asia Pacific (Jakarta) ap-southeast-3
-Asia Pacific (Mumbai) ap-south-1
-Asia Pacific (Osaka) ap-northeast-3
-Asia Pacific (Seoul) ap-northeast-2
-Asia Pacific (Singapore) ap-southeast-1
-Asia Pacific (Sydney) ap-southeast-2
-Asia Pacific (Tokyo) ap-northeast-1
-Canada (Central) ca-central-1
-Europe (Frankfurt) eu-central-1
-Europe (Ireland) eu-west-1
-Europe (London) eu-west-2
-Europe (Milan) eu-south-1
-Europe (Paris) eu-west-3
-Europe (Spain) eu-south-2 rds.eu-south-2.amazonaws.com HTTPS
-Europe (Stockholm) eu-north-1
-Europe (Zurich) eu-central-2 rds.eu-central-2.amazonaws.com HTTPS
-Middle East (Bahrain) me-south-1
-Middle East (UAE) me-central-1 rds.me-central-1.amazonaws.com HTTPS
-South America (São Paulo) sa-east-1
-AWS GovCloud (US-East) us-gov-east-1 rds.us-gov-east-1.amazonaws.com HTTPS
-AWS GovCloud (US-West) us-gov-west-1 rds.us-gov-west-1.amazonaws.com HTTPS
+```bash
+
+[us-east-1] output file: out/us-east-1-ondemand.json
+[us-east-2] output file: out/us-east-2-ondemand.json
+[us-west-1] output file: out/us-west-1-ondemand.json
+[us-west-2] output file: out/us-west-2-ondemand.json
+[us-gov-west-1] output file: out/us-gov-west-1-ondemand.json
+...
+```
+
+#### Option 2: retrieve prices for a given region, EC2 term, EC2 instance types
+
+Prerequisites: python3
+
+Usage:
+
+- `<region-code>`: AWS Region ID (eg, `us-east-1`)
+- `<ec2-types>`: Comma-separated list of EC2 instance types (eg, `m5.xlarge,r5.2xlarge`)
+- `<ec2-term>`: EC2 term - accepted values: `JRTCKXETXF` (On-Demand) and `6QCMYABX3D` (1 year)
+
+```bash
+python3 prices.py \
+  -r <region-code> \
+  -e <ec2-types> \
+  -c <ec2-term>
+```
+
+Example:
+
+```bash
+python3 prices.py \
+  -r us-east-1 \
+  -e m5.xlarge,r5.2xlarge,r5.4xlarge,m5.2xlarge,r5.xlarge,m5.2xlarge \
+  -c 6QCMYABX3D
+```
+
+This command returns a JSON as per following example of output:
+
+```json
+[
+  {
+    "g4dn.12xlarge": "5.1900000000",
+    "vcpu": "48",
+    "memory": "192 GiB"
+  },
+  {
+    "g4dn.16xlarge": "5.7740000000",
+    "vcpu": "64",
+    "memory": "256 GiB"
+  },
+  ...
+]
+```
+
+## Troubleshooting
+
+An `error.log` file is created when prices for specific EC2 instance types cannot be retrieved.
+
+Errors are usually found on *uncommon* EC2 types - you will need to investigate them if you wish to use their prices in a ROSA cost estimate.
+
+## Known issues
+
+The following regions are currently unsupported:
+
+- `sa-east-1`
+- `ap-south-1`
 
 ## Resources
 
-- <https://www.sentiatechblog.com/using-the-ec2-price-list-api>
-- <https://docs.aws.amazon.com/general/latest/gr/rande.html>
+- [AWS service endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html)
+- [Using the AWS Price List API](https://www.sentiatechblog.com/using-the-ec2-price-list-api)
