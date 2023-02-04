@@ -215,6 +215,10 @@ type WorkerNode = {
 }
 
 export function getWorkerNodes(nodesConfig: any, prices: any): WorkerNode[] {
+    if (nodesConfig.length < 2) {
+        throw new Error('No EC2  instances found in CSV data')
+    }
+
     if (nodesConfig[0][0] !== 'ec2_type') {
         console.error(nodesConfig)
         throw new Error('CSV header missing: ec2_type')
@@ -224,10 +228,6 @@ export function getWorkerNodes(nodesConfig: any, prices: any): WorkerNode[] {
     let nodes: any[] = []
     for (const row of nodesConfig) {
         const ec2PriceHour = prices[row[0]];
-        if (isNaN(ec2PriceHour.price) || isNaN(ec2PriceHour.vcpu)) {
-            throw new Error(`Price for ${row[0]} not found in ${JSON.stringify(prices)}`)
-        }
-
         nodes.push({
             ec2Type: row[0],
             ec2PriceHour: ec2PriceHour.price,

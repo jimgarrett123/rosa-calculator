@@ -5,7 +5,7 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "cost": "ts-node index.ts",
+    "cost": "ts-node index.ts --coverage",
     "test": "jest"
   },
   "devDependencies": {
