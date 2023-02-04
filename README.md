@@ -123,7 +123,7 @@ NPE*: to be confirmed as data for this environment seems incomplete.
 
 ## Usage
 
-Get On-demand price for an instance: `python3 prices.py -r "Asia Pacific (Sydney)" -e m5.xlarge`.
+Get On-demand price for an instance: `python3 prices-ec2.py -r "Asia Pacific (Sydney)" -e m5.xlarge`.
 
 Calculate cost:
 

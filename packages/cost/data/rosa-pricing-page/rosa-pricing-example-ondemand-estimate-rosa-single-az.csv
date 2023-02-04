@@ -1,0 +1,14 @@
+, , , , , ,
+/Users/willgrod/Code/rosa/cost-calculator/packages/cost/data/rosa-pricing-page/rosa-pricing-example-ondemand.csv, , , , , ,
+, , , , , ,
+,"Option1: On Demand",,"Option 2: ROSA 1 yr", "" , "Option 3: 3 Year"
+, Monthly, Annually, Monthly, Annually, Monthly, Annually
+ROSA Control Plane Cost (EC2): 3x m5.2xlarge, 1051, 12614,,,,
+ROSA Infra Node Cost (EC2): 2x r5.xlarge nodes, 441, 5291,,,,
+ROSA Data Plane Cost (EC2): 3x nodes, 526, 6307,,,,
+ROSA Storage Cost (EBS): 3x worker nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots), 145, 1740,,,,
+ROSA Storage Cost (EBS): 2x infra nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots), 97, 1164,,,,
+ROSA Storage Cost (EBS): 3x control plane nodes 350GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots), 167, 2004,,,,
+ROSA Control plane Red Hat fee, 22, 263,,,,
+ROSA Data plane Red Hat fee, 374, 4494,,,,
+, 2823, 33876, 1835, 22019, 1468, 17616
