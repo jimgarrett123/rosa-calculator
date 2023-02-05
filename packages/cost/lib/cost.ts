@@ -1,5 +1,7 @@
 import { getEbsPrice } from "./price"
 
+const HOURS_PER_MONTH = 730;
+
 export type Estimate = {
     estimate: {
         controlPlane: {
@@ -8,6 +10,14 @@ export type Estimate = {
                 monthly: any;
                 annually: any;
             };
+            "1year": {
+                monthly: any;
+                annually: any;
+            },
+            "3year": {
+                monthly: any;
+                annually: any;
+            },
         };
         infra: {
             description: any;
@@ -15,6 +25,14 @@ export type Estimate = {
                 monthly: any;
                 annually: any;
             };
+            "1year": {
+                monthly: any;
+                annually: any;
+            },
+            "3year": {
+                monthly: any;
+                annually: any;
+            },
         };
         workers: {
             description: any;
@@ -22,6 +40,15 @@ export type Estimate = {
                 monthly: any;
                 annually: any;
             };
+            "1year": {
+                monthly: any;
+                annually: any;
+            },
+            "3year": {
+                monthly: any;
+                annually: any;
+            },
+
         };
         storageWorkers: {
             description: any;
@@ -45,8 +72,18 @@ export type Estimate = {
         };
         redHatDataplaneFees: {
             description: any;
-            monthly: any;
-            annually: any;
+            onDemand: {
+                monthly: any;
+                annually: any; 
+            }
+            "1year": {
+                monthly: any;
+                annually: any;
+            },
+            "3year": {
+                monthly: any;
+                annually: any;
+            }
         };
     }
     estimateTotal: {
@@ -66,24 +103,24 @@ export type Estimate = {
     }
 };
 
-const groupBy = (array, key) => {
-    return array.reduce((acc, curr) => {
-        (acc[curr[key]] = acc[curr[key]] || []).push(curr);
-        return acc;
-    }, {});
-};
-
-
-export function getEstimate(workerNodes: WorkerNode[], infraNodesCount: number, ec2Prices: any, ebsPrices: any): Estimate {
-    let ec2MonthlyCost = 0
-    let rhMonthlyCost = 0
+export function getEstimate(workerNodes: WorkerNode[], infraNodesCount: number, ec2Prices: EC2[], ebsPrices: any): Estimate {
+    let ec2OnDemandMonthlyCost = 0
+    let ec21yearMonthlyCost = 0
+    let ec23yearMonthlyCost = 0
+    let rhOnDemandMonthlyCost = 0
+    let rh1yearMonthlyCost = 0
+    let rh3yearMonthlyCost = 0
 
     const rosaWorkerNodesArray = Object.values(workerNodes)
     const workerNodeCount = workerNodes.length
 
     for (const node of rosaWorkerNodesArray) {
-        ec2MonthlyCost += node.ec2PriceHour as number * 730
-        rhMonthlyCost += node.rhPriceHour as number * 730
+        ec2OnDemandMonthlyCost += node.ec2PriceHour as number * HOURS_PER_MONTH
+        ec21yearMonthlyCost += node.ec2Price1y / 12
+        ec23yearMonthlyCost += node.ec2Price3y / 3 / 12
+        rhOnDemandMonthlyCost += node.rhOnDemandPriceHour as number * HOURS_PER_MONTH
+        rh1yearMonthlyCost += node.rh1yearPriceHour as number * HOURS_PER_MONTH
+        rh3yearMonthlyCost += node.rh3yearPriceHour as number * HOURS_PER_MONTH
     }
 
     let ec2TypeInfra = 'r5.xlarge'
@@ -92,10 +129,13 @@ export function getEstimate(workerNodes: WorkerNode[], infraNodesCount: number, 
     } else if (workerNodeCount > 100) {
         ec2TypeInfra = 'r5.4xlarge'
     }
-    if (!ec2Prices[ec2TypeInfra]) {
+    const ec2Infra = ec2Prices.find(ec2 => ec2.type === ec2TypeInfra);
+    if (!ec2Infra) {
         throw new Error(`Infra node price not found (EC2 type: ${ec2TypeInfra})`)
     }
-    const unitCostInfra = ec2Prices[ec2TypeInfra].price
+    const unitCostInfraOnDemand = Number(ec2Infra.priceOnDemand)
+    const unitCostInfra1year = Number(ec2Infra.price1yr)
+    const unitCostInfra3year = Number(ec2Infra.price3yr)
 
     let ec2TypeControlPlane = 'm5.2xlarge'
     if (workerNodeCount > 25 && workerNodeCount <= 100) {
@@ -103,102 +143,174 @@ export function getEstimate(workerNodes: WorkerNode[], infraNodesCount: number, 
     } else if (workerNodeCount > 100) {
         ec2TypeControlPlane = 'm5.8xlarge'
     }
-    if (!ec2Prices[ec2TypeControlPlane]) {
+
+    const ec2Cplane = ec2Prices.find(ec2 => ec2.type === ec2TypeControlPlane);
+
+    if (!ec2Cplane) {
         throw new Error(`Control plane node price not found (EC2 type: ${ec2TypeControlPlane})`)
     }
-    const unitCostControlPlane = ec2Prices[ec2TypeControlPlane].price
+    const unitCostControlPlaneOnDemand = Number(ec2Cplane.priceOnDemand)
+    const unitCostControlPlane1year = Number(ec2Cplane.price1yr)
+
+    const unitCostControlPlane3year = Number(ec2Cplane.price3yr)
 
     const ebsMonthlyPriceOthers = getEbsPrice(300, ebsPrices)
     const ebsMonthlyPriceControlPlane = getEbsPrice(350, ebsPrices)
-    const groupedData = groupBy(rosaWorkerNodesArray, 'ec2Type');
-    let workerNodeLabel: string[] = []
-    Object.entries(groupedData).forEach(([key, value]) => {
-        workerNodeLabel.push(`${(value as string[]).length}x ${key}`);
-    });
 
     const estimate = {
         workers: {
-            description: `ROSA Data Plane Cost (EC2): ${workerNodeCount}x nodes (${workerNodeLabel.join(', ')})`,
+            description: `ROSA Data Plane Cost (EC2): ${workerNodeCount}x nodes`,
             onDemand: {
-                monthly: Math.round(ec2MonthlyCost),
-                annually: Math.round(ec2MonthlyCost * 12),
+                monthly: ec2OnDemandMonthlyCost,
+                annually: ec2OnDemandMonthlyCost * 12,
             },
+            "1year": {
+                monthly: ec21yearMonthlyCost,
+                annually: ec21yearMonthlyCost * 12,
+            },
+            "3year": {
+                monthly: ec23yearMonthlyCost,
+                annually:  ec23yearMonthlyCost * 12,
+            }
         },
         infra: {
             description: `ROSA Infra Node Cost (EC2): ${infraNodesCount}x ${ec2TypeInfra} nodes`,
             onDemand: {
-                monthly: Math.round(unitCostInfra * infraNodesCount * 730),
-                annually: Math.round(unitCostInfra * infraNodesCount * 730 * 12),
+                monthly: unitCostInfraOnDemand * infraNodesCount * HOURS_PER_MONTH,
+                annually: unitCostInfraOnDemand * infraNodesCount * HOURS_PER_MONTH * 12,
                 calculations: {
-                    monthly: `= ${unitCostInfra}$ EC2 price 1 infra. node * ${infraNodesCount} nodes * 730`,
-                    annually: `= ${unitCostInfra}$ EC2 price 1 infra. node * ${infraNodesCount} nodes * 730 * 12`
+                    monthly: `= $${unitCostInfraOnDemand} EC2 price 1 infra. node * ${infraNodesCount} nodes * ${HOURS_PER_MONTH}h`,
+                    annually: `= $${unitCostInfraOnDemand} EC2 price 1 infra. node * ${infraNodesCount} nodes * ${HOURS_PER_MONTH}h * 12`
                 }
             },
+            "1year": {
+                monthly: unitCostInfra1year * infraNodesCount / 12,
+                annually: unitCostInfra1year * infraNodesCount,
+                calculations: {
+                    monthly: `= $${unitCostInfra1year} EC2 price 1 infra. node / 1 year (All upfront) ÷ 12 * ${infraNodesCount} nodes`,
+                    annually: `= $${unitCostInfra1year} EC2 price 1 infra. node / 1 year (All upfront) * ${infraNodesCount} nodes`
+                }
+            },
+            "3year": {
+                monthly: ((unitCostInfra3year/3) * infraNodesCount) /12,
+                annually: (unitCostInfra3year/3) * infraNodesCount,
+                calculations: {
+                    monthly: `= $${unitCostInfra3year} EC2 price 1 infra. node / 3 year (All upfront) * ${infraNodesCount} nodes ÷ 3`,
+                    annually: `= $${unitCostInfra3year} EC2 price 1 infra. node / 3 year (All upfront) * ${infraNodesCount} nodes ÷ 3`
+                }
+
+            }
         },
         controlPlane: {
             description: `ROSA Control Plane Cost (EC2): 3x ${ec2TypeControlPlane}`,
             onDemand: {
-                monthly: Math.round(unitCostControlPlane * 3 * 730),
-                annually: Math.round(unitCostControlPlane * 3 * 730 * 12),
+                monthly: unitCostControlPlaneOnDemand * 3 * HOURS_PER_MONTH,
+                annually: unitCostControlPlaneOnDemand * 3 * HOURS_PER_MONTH * 12,
                 calculations: {
-                    monthly: `${unitCostControlPlane}$ EC2 price control plane node * 3 nodes * 730`,
-                    annually: `${unitCostControlPlane}$ EC2 price control plane node * 3 nodes * 730 * 12`
+                    monthly: `$${unitCostControlPlaneOnDemand} EC2 price control plane node * 3 nodes * ${HOURS_PER_MONTH}h`,
+                    annually: `$${unitCostControlPlaneOnDemand} EC2 price control plane node * 3 nodes * ${HOURS_PER_MONTH}h * 12`
+                }
+            },
+            "1year": {
+                monthly: (unitCostControlPlane1year * 3) / 12,
+                annually: unitCostControlPlane1year * 3,
+                calculations: {
+                    monthly: `$${unitCostControlPlane1year} EC2 price control plane node 1 year (All upfront) ÷ 12 * 3 nodes`,
+                    annually: `$${unitCostControlPlane1year} EC2 price control plane node 1 year (All upfront) * 3 nodes`
+                }
+            },
+            "3year": {
+                monthly: ((unitCostControlPlane3year/3) * 3)/12,
+                annually: (unitCostControlPlane3year/3) * 3,
+                calculations: {
+                    monthly: `$${unitCostControlPlane3year}$ EC2 price control plane node 3 year (All upfront) ÷ 12 ÷ 3 * 3 nodes`,
+                    annually: `$${unitCostControlPlane3year}$ EC2 price control plane node 3 year (All upfront) ÷ 3 * 3 nodes`
                 }
             },
         },
         redHatClusterFees: {
             description: `ROSA Control plane Red Hat fee`,
-            monthly: Math.round(0.03 * 730),
-            annually: Math.round(0.03 * 730 * 12),
+            monthly: 0.03 * HOURS_PER_MONTH,
+            annually: 0.03 * HOURS_PER_MONTH * 12,
             calculations: {
-                monthly: '0.03 * 730',
-                annually: '0.03 * 730 * 12'
+                monthly: `$0.03 * ${HOURS_PER_MONTH}h`,
+                annually: `$0.03 * ${HOURS_PER_MONTH}h * 12`
             }
         },
         redHatDataplaneFees: {
             description: `ROSA Data plane Red Hat fee`,
-            monthly: Math.round(rhMonthlyCost),
-            annually: Math.round(rhMonthlyCost * 12),
+            onDemand: {
+                monthly: rhOnDemandMonthlyCost,
+                annually: rhOnDemandMonthlyCost * 12,
+            },
+            "1year": {
+                monthly: rh1yearMonthlyCost,
+                annually: rh1yearMonthlyCost * 12,
+            },
+            "3year": {
+                monthly: rh3yearMonthlyCost,
+                annually: rh3yearMonthlyCost * 12,
+            }
         },
         storageWorkers: {
             description: `ROSA Storage Cost (EBS): ${workerNodeCount}x worker nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots)`,
-            monthly: Math.round(ebsMonthlyPriceOthers * workerNodeCount),
-            annually: Math.round(ebsMonthlyPriceOthers * workerNodeCount) * 12,
+            monthly: ebsMonthlyPriceOthers * workerNodeCount,
+            annually: ebsMonthlyPriceOthers * workerNodeCount * 12,
         },
         storageInfra: {
             description: `ROSA Storage Cost (EBS): ${infraNodesCount}x infra nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots)`,
-            monthly: Math.round(ebsMonthlyPriceOthers * infraNodesCount),
-            annually: Math.round(ebsMonthlyPriceOthers * infraNodesCount) * 12
+            monthly: ebsMonthlyPriceOthers * infraNodesCount,
+            annually: ebsMonthlyPriceOthers * infraNodesCount * 12
         },
         storageControlPlane: {
             description: `ROSA Storage Cost (EBS): 3x control plane nodes 350GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots)`,
-            monthly: Math.round(ebsMonthlyPriceControlPlane * 3),
-            annually: Math.round(ebsMonthlyPriceControlPlane * 3) * 12
+            monthly: ebsMonthlyPriceControlPlane * 3,
+            annually: ebsMonthlyPriceControlPlane * 3 * 12
         }
     }
 
-    const monthlyTotal = estimate.workers.onDemand.monthly
-        + estimate.infra.onDemand.monthly
-        + estimate.controlPlane.onDemand.monthly
-        + estimate.redHatClusterFees.monthly
-        + estimate.redHatDataplaneFees.monthly
-        + estimate.storageWorkers.monthly
-        + estimate.storageInfra.monthly
-        + estimate.storageControlPlane.monthly
+    const totalOnDemand = (estimate.workers.onDemand.annually
+        + estimate.infra.onDemand.annually
+        + estimate.controlPlane.onDemand.annually
+        + estimate.redHatClusterFees.annually
+        + estimate.redHatDataplaneFees.onDemand.annually
+        + estimate.storageWorkers.annually
+        + estimate.storageInfra.annually
+        + estimate.storageControlPlane.annually)
+
+
+    const total1year = estimate.workers["1year"].annually
+        + estimate.infra["1year"].annually
+        + estimate.controlPlane["1year"].annually
+        + estimate.redHatClusterFees.annually
+        + estimate.redHatDataplaneFees["1year"].annually
+        + estimate.storageWorkers.annually
+        + estimate.storageInfra.annually
+        + estimate.storageControlPlane.annually
+    
+    const total3year = estimate.workers["3year"].annually
+        + estimate.infra["3year"].annually
+        + estimate.controlPlane["3year"].annually
+        + estimate.redHatClusterFees.annually
+        + estimate.redHatDataplaneFees["3year"].annually 
+        + estimate.storageWorkers.annually
+        + estimate.storageInfra.annually
+        + estimate.storageControlPlane.annually
+
 
     const estimateTotal = {
         onDemand: {
-            monthly: monthlyTotal,
-            annual: monthlyTotal * 12
+            monthly: totalOnDemand / 12,
+            annual: totalOnDemand
         },
         oneYear: {
-            monthly: Math.round(monthlyTotal * 0.66),
-            annually: Math.round(monthlyTotal * 12 * 0.66),
+            monthly: total1year/12,
+            annually: total1year,
         },
         threeYear:
         {
-            monthly: Math.round(monthlyTotal * 0.45),
-            annually: Math.round(monthlyTotal * 12 * 0.45),
+            monthly: total3year /12,
+            annually: total3year,
         }
     }
 
@@ -209,29 +321,54 @@ export function getEstimate(workerNodes: WorkerNode[], infraNodesCount: number, 
 }
 
 type WorkerNode = {
-    ec2Type: string,
-    ec2PriceHour: number,
-    rhPriceHour: number,
+    ec2Type: string
+    ec2PriceHour: number
+    ec2Price1y: number,
+    ec2Price3y: number,
+    rhOnDemandPriceHour: number
+    rh1yearPriceHour: number
+    rh3yearPriceHour: number
 }
 
-export function getWorkerNodes(nodesConfig: any, prices: any): WorkerNode[] {
+type EC2 = {
+    "type": string
+    "priceOnDemand": string
+    "vcpu": string
+    "memory": string
+    "price1yr": string
+    "price3yr": string
+}
+
+export function getWorkerNodes(nodesConfig: any, ec2s: EC2[]): WorkerNode[] {
     if (nodesConfig.length < 2) {
-        throw new Error('No EC2  instances found in CSV data')
+        throw new Error('No EC2 instances found in CSV data')
     }
 
     if (nodesConfig[0][0] !== 'ec2_type') {
-        console.error(nodesConfig)
         throw new Error('CSV header missing: ec2_type')
     }
     nodesConfig.shift(); // remove csv headers
 
+    const workerFeesOnDemand = 0.171 // 1500/12/HOURS_PER_MONTH 
+    const workerFees1year = 1000/12/HOURS_PER_MONTH 
+    const workerFees3year = 667/12/HOURS_PER_MONTH 
+
     let nodes: any[] = []
     for (const row of nodesConfig) {
-        const ec2PriceHour = prices[row[0]];
+        const ec2Type = row[0]
+        const ec2 = ec2s.find(ec2 => ec2.type === ec2Type);
+        if (!ec2) {
+            throw new Error(`EC2 type "${ec2Type}" not found in prices`)
+        }
+        
         nodes.push({
-            ec2Type: row[0],
-            ec2PriceHour: ec2PriceHour.price,
-            rhPriceHour: Number(0.171 * (ec2PriceHour.vcpu / 4)),
+            ec2Type,
+            ec2PriceHour: Number(ec2.priceOnDemand),
+            ec2Price1y: Number(ec2.price1yr),
+            ec2Price3y: Number(ec2.price3yr),
+            rhOnDemandPriceHour: Number(workerFeesOnDemand * (Number(ec2.vcpu) / 4)),
+            rh1yearPriceHour: Number(workerFees1year * (Number(ec2.vcpu) / 4)),
+            rh3yearPriceHour: Number(workerFees3year * (Number(ec2.vcpu) / 4)),
         });
     }
 

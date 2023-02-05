@@ -18,17 +18,13 @@ const ec2PricesPath = myArgs[1]
 if (!fs.existsSync(ec2PricesPath)) {
     throw new Error('EC2 Price file missing')
 }
+const ec2Prices = JSON.parse(fs.readFileSync(ec2PricesPath, { encoding: 'utf8', flag: 'r' }))
 
 const ebsPricesPath = myArgs[2]
 if (!fs.existsSync(ebsPricesPath)) {
     throw new Error('EBS Price file missing')
 }
-
-const ec2RawPrices = JSON.parse(fs.readFileSync(ec2PricesPath, { encoding: 'utf8', flag: 'r' }))
-const ec2Prices: EC2InstancePrices = getEC2Prices(ec2RawPrices);
-
 const ebsPrices = JSON.parse(fs.readFileSync(ebsPricesPath, { encoding: 'utf8', flag: 'r' }))
-
 
 const outPath = `${directoryPath}/cost-estimated-generated.csv`
 fs.appendFileSync(outPath, path.basename(ec2PricesPath) + '\n')
@@ -45,22 +41,20 @@ fs.readdirSync(directoryPath).map(file => `${directoryPath}/${file}`).forEach(fi
         dataStream.pipe(parseStream);
 
         let data: any[] = [];
-        parseStream.on("data", chunk => {
-            data.push(chunk);
-        });
+        parseStream
+            .on("data", chunk => {
+                data.push(chunk);
+            })
+            .on("finish", () => {
+                const workers = getWorkerNodes(data, ec2Prices);
+                const estimate1 = getEstimate(workers, 3, ec2Prices, ebsPrices)
+                const label1 = `${path.basename(filePath).replace('.csv', '')} - Multi AZ`
+                getCsvEstimate(outPath, label1, estimate1)
 
-        parseStream.on("finish", () => {
-            const workers = getWorkerNodes(data, ec2Prices);
-            const estimate1 = getEstimate(workers, 3, ec2Prices, ebsPrices)
-            const label1 = `${path.basename(filePath).replace('.csv', '')} - Multi AZ`
-            getCsvEstimate(outPath, label1, estimate1)
-
-            const estimate2 = getEstimate(workers, 2, ec2Prices, ebsPrices)
-            const label2 = `${path.basename(filePath).replace('.csv', '')} - Single AZ`
-            getCsvEstimate(outPath, label2, estimate2)
-            console.log(`ROSA Cost estimate output file: ${outPath}`)
-        });
-
-
+                const estimate2 = getEstimate(workers, 2, ec2Prices, ebsPrices)
+                const label2 = `${path.basename(filePath).replace('.csv', '')} - Single AZ`
+                getCsvEstimate(outPath, label2, estimate2)
+                console.log(`ROSA Cost estimate output file: ${outPath}`)
+            });
     }
 })

@@ -137,38 +137,45 @@ const getMockNodes = (string, count) => {
 describe('get worker nodes', () => {
   test('throws if price not found', () => {
     expect(() => getWorkerNodes([
-      ['ec2_type'],
-      ['r5.4xlarge']],
+['ec2_type'],
+['r5.4xlarge']],
+[{
+  "type": "g4dn.16xlarge",
+  "priceOnDemand": "4.3520000000",
+  "vcpu": "64",
+  "memory": "256 GiB",
+  "price3yr": "43003",
+  "price1yr": "22417"
+}])).
 
-      {
-        "g4dn.16xlarge": {
-          "price": 4.832,
-          "vcpu": 64
-        }
-      })).
 
-
-      toThrowErrorMatchingInlineSnapshot(`"Cannot read properties of undefined (reading 'price')"`)
+toThrowErrorMatchingInlineSnapshot(`"EC2 type "r5.4xlarge" not found in prices"`)
   });
 
   test('return worker nodes and their prices', () => {
     expect(getWorkerNodes([
-      ['ec2_type'],
-      ['r5.4xlarge'],
-    ],
-      {
-        "r5.4xlarge": {
-          "price": 4.832,
-          "vcpu": 64,
-        }
-      }
-    )).
-      toMatchInlineSnapshot(`
+['ec2_type'],
+['r5.4xlarge']],
+
+[{
+  "type": "r5.4xlarge",
+  "priceOnDemand": "4.832",
+  "vcpu": "64",
+  "memory": "256 GiB",
+  "price3yr": "43003",
+  "price1yr": "22417"
+}])).
+
+toMatchInlineSnapshot(`
 [
   {
+    "ec2Price1y": 22417,
+    "ec2Price3y": 43003,
     "ec2PriceHour": 4.832,
     "ec2Type": "r5.4xlarge",
-    "rhPriceHour": 2.736,
+    "rh1yearPriceHour": 1.82648401826484,
+    "rh3yearPriceHour": 1.2182648401826484,
+    "rhOnDemandPriceHour": 2.736,
   },
 ]
 `)
@@ -179,12 +186,14 @@ describe('get worker nodes', () => {
 describe('estimate', () => {
   test('should fail due to infra node price not found', () => {
 
-    const ec2Prices = {
-      "m5.xlarge": {
-        "price": 0.192,
-        "vcpu": 4,
-      }
-    }
+    const ec2Prices = [{
+        "type": "m5.xlarge",
+        "priceOnDemand": "0.192",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
+    }]
     const ebsPrices = {}
 
     const workerNodes = getWorkerNodes(getMockNodes("m5.xlarge", 3), ec2Prices)
@@ -198,17 +207,23 @@ describe('estimate', () => {
 
   test('should fail due to control plane node price not found', () => {
 
-    const ec2Prices = {
-      "m5.xlarge": {
-        price: 0.192,
-        vcpu: 4,
+    const ec2Prices = [
+      {
+        "type": "m5.xlarge",
+        "priceOnDemand": "0.192",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-
-      "r5.xlarge": {
-        price: 0.252,
-        vcpu: 4,
-      },
-    }
+      {
+        "type": "r5.xlarge",
+        "priceOnDemand":  "0.252",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
+    }]
 
     const ebsPrices = {}
 
@@ -223,66 +238,119 @@ describe('estimate', () => {
 
   test('should be identical to on-demand example in ROSA pricing page https://aws.amazon.com/rosa/pricing/', () => {
 
-    const ec2Prices = {
-      "m5.xlarge": {
-        price: 0.192,
-        vcpu: 4,
+    const ec2Prices = [
+      {
+        "type": "m5.xlarge",
+        "priceOnDemand": "0.192",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-
-      "r5.xlarge": {
-        price: 0.252,
-        vcpu: 4,
+      {
+        "type": "r5.xlarge",
+        "priceOnDemand": "0.252",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-      "m5.2xlarge": {
-        price: 0.384,
-        "vcpu": 8
-      },
-    }
+      {
+        "type": "m5.2xlarge",
+        "priceOnDemand": "0.384",
+        "vcpu": "8",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
+      }
+    ]  
 
     const workerNodes = getWorkerNodes(getMockNodes("m5.xlarge", 3), ec2Prices)
 
     expect(
-      getEstimate(
-        workerNodes,
-        3,
-        ec2Prices, mockEbsPrices)).toMatchInlineSnapshot(`
+getEstimate(
+workerNodes,
+3,
+ec2Prices, mockEbsPrices)).toMatchInlineSnapshot(`
 {
   "estimate": {
     "controlPlane": {
+      "1year": {
+        "annually": 67251,
+        "calculations": {
+          "annually": "$22417 EC2 price control plane node 1 year (All upfront) * 3 nodes",
+          "monthly": "$22417 EC2 price control plane node 1 year (All upfront) ÷ 12 * 3 nodes",
+        },
+        "monthly": 5604.25,
+      },
+      "3year": {
+        "annually": 43003,
+        "calculations": {
+          "annually": "$43003$ EC2 price control plane node 3 year (All upfront) ÷ 3 * 3 nodes",
+          "monthly": "$43003$ EC2 price control plane node 3 year (All upfront) ÷ 12 ÷ 3 * 3 nodes",
+        },
+        "monthly": 3583.5833333333335,
+      },
       "description": "ROSA Control Plane Cost (EC2): 3x m5.2xlarge",
       "onDemand": {
-        "annually": 10092,
+        "annually": 10091.520000000002,
         "calculations": {
-          "annually": "0.384$ EC2 price control plane node * 3 nodes * 730 * 12",
-          "monthly": "0.384$ EC2 price control plane node * 3 nodes * 730",
+          "annually": "$0.384 EC2 price control plane node * 3 nodes * 730h * 12",
+          "monthly": "$0.384 EC2 price control plane node * 3 nodes * 730h",
         },
-        "monthly": 841,
+        "monthly": 840.9600000000002,
       },
     },
     "infra": {
+      "1year": {
+        "annually": 67251,
+        "calculations": {
+          "annually": "= $22417 EC2 price 1 infra. node / 1 year (All upfront) * 3 nodes",
+          "monthly": "= $22417 EC2 price 1 infra. node / 1 year (All upfront) ÷ 12 * 3 nodes",
+        },
+        "monthly": 5604.25,
+      },
+      "3year": {
+        "annually": 43003,
+        "calculations": {
+          "annually": "= $43003 EC2 price 1 infra. node / 3 year (All upfront) * 3 nodes ÷ 3",
+          "monthly": "= $43003 EC2 price 1 infra. node / 3 year (All upfront) * 3 nodes ÷ 3",
+        },
+        "monthly": 3583.5833333333335,
+      },
       "description": "ROSA Infra Node Cost (EC2): 3x r5.xlarge nodes",
       "onDemand": {
-        "annually": 6623,
+        "annually": 6622.5599999999995,
         "calculations": {
-          "annually": "= 0.252$ EC2 price 1 infra. node * 3 nodes * 730 * 12",
-          "monthly": "= 0.252$ EC2 price 1 infra. node * 3 nodes * 730",
+          "annually": "= $0.252 EC2 price 1 infra. node * 3 nodes * 730h * 12",
+          "monthly": "= $0.252 EC2 price 1 infra. node * 3 nodes * 730h",
         },
-        "monthly": 552,
+        "monthly": 551.88,
       },
     },
     "redHatClusterFees": {
-      "annually": 263,
+      "annually": 262.79999999999995,
       "calculations": {
-        "annually": "0.03 * 730 * 12",
-        "monthly": "0.03 * 730",
+        "annually": "$0.03 * 730h * 12",
+        "monthly": "$0.03 * 730h",
       },
       "description": "ROSA Control plane Red Hat fee",
-      "monthly": 22,
+      "monthly": 21.9,
     },
     "redHatDataplaneFees": {
-      "annually": 4494,
+      "1year": {
+        "annually": 3000,
+        "monthly": 250,
+      },
+      "3year": {
+        "annually": 2001,
+        "monthly": 166.75,
+      },
       "description": "ROSA Data plane Red Hat fee",
-      "monthly": 374,
+      "onDemand": {
+        "annually": 4493.88,
+        "monthly": 374.49,
+      },
     },
     "storageControlPlane": {
       "annually": 1800,
@@ -290,35 +358,43 @@ describe('estimate', () => {
       "monthly": 150,
     },
     "storageInfra": {
-      "annually": 1572,
+      "annually": 1566,
       "description": "ROSA Storage Cost (EBS): 3x infra nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots)",
-      "monthly": 131,
+      "monthly": 130.5,
     },
     "storageWorkers": {
-      "annually": 1572,
+      "annually": 1566,
       "description": "ROSA Storage Cost (EBS): 3x worker nodes 300GB General Purpose SSDs (gp3 - 3000 IOPS + 2 daily snapshots)",
-      "monthly": 131,
+      "monthly": 130.5,
     },
     "workers": {
-      "description": "ROSA Data Plane Cost (EC2): 3x nodes (3x m5.xlarge)",
+      "1year": {
+        "annually": 67251,
+        "monthly": 5604.25,
+      },
+      "3year": {
+        "annually": 43003,
+        "monthly": 3583.5833333333335,
+      },
+      "description": "ROSA Data Plane Cost (EC2): 3x nodes",
       "onDemand": {
-        "annually": 5046,
-        "monthly": 420,
+        "annually": 5045.76,
+        "monthly": 420.48,
       },
     },
   },
   "estimateTotal": {
     "onDemand": {
-      "annual": 31452,
-      "monthly": 2621,
+      "annual": 31448.520000000004,
+      "monthly": 2620.7100000000005,
     },
     "oneYear": {
-      "annually": 20758,
-      "monthly": 1730,
+      "annually": 209947.8,
+      "monthly": 17495.649999999998,
     },
     "threeYear": {
-      "annually": 14153,
-      "monthly": 1179,
+      "annually": 136204.8,
+      "monthly": 11350.4,
     },
   },
 }
@@ -326,21 +402,32 @@ describe('estimate', () => {
   })
 
   test('should change the size of the control plane and infra if >25 and <= 100', () => {
-
-    const ec2Prices = {
-      "r5.2xlarge": {
-        price: 0.252,
-        vcpu: 4,
+    const ec2Prices = [
+      {
+        "type": "m5.xlarge",
+        "priceOnDemand": "0.384",
+        "vcpu": "8",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-      "m5.xlarge": {
-        price: 0.384,
-        vcpu: 8
+      {
+        "type": "r5.2xlarge",
+        "priceOnDemand": "0.252",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-      "m5.4xlarge": {
-        price: 0.384,
-        vcpu: 8
-      },
-    }
+      {
+        "type": "m5.4xlarge",
+        "priceOnDemand": "0.384",
+        "vcpu": "8",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
+      }
+    ]  
 
     const workerNodes = getWorkerNodes(getMockNodes("m5.xlarge", 26), ec2Prices)
 
@@ -364,20 +451,32 @@ describe('estimate', () => {
 
   test('should change the size of the control plane and infra if >100', () => {
 
-    const ec2Prices = {
-      "r5.4xlarge": {
-        price: 0.252,
-        vcpu: 4,
+    const ec2Prices = [
+      {
+        "type": "m5.xlarge",
+        "priceOnDemand": "0.384",
+        "vcpu": "8",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-      "m5.xlarge": {
-        price: 0.384,
-        vcpu: 8
+      {
+        "type": "r5.4xlarge",
+        "priceOnDemand": "0.252",
+        "vcpu": "4",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
       },
-      "m5.8xlarge": {
-        price: 0.384,
-        vcpu: 8
-      },
-    }
+      {
+        "type": "m5.8xlarge",
+        "priceOnDemand": "0.384",
+        "vcpu": "8",
+        "memory": "256 GiB",
+        "price3yr": "43003",
+        "price1yr": "22417"
+      }
+    ]  
 
     const workerNodes = getWorkerNodes(getMockNodes("m5.xlarge", 101), ec2Prices)
 
@@ -403,13 +502,29 @@ describe('estimate', () => {
 describe('input data (worker nodes', () => {
   test('fails if no instances found in csv data ', () => {
     expect(() =>
-      getWorkerNodes([], {})).
-      toThrowErrorMatchingInlineSnapshot(`"No EC2  instances found in CSV data"`)
+getWorkerNodes([], [
+{
+  "type": "m5.4xlarge",
+  "priceOnDemand": "0.384",
+  "vcpu": "8",
+  "memory": "256 GiB",
+  "price3yr": "43003",
+  "price1yr": "22417"
+}])).
+toThrowErrorMatchingInlineSnapshot(`"No EC2 instances found in CSV data"`)
   })
 
   test('fails if csv data does not contain ec2_type header in first line', () => {
     expect(() =>
-      getWorkerNodes([['m5.large'], ['m5.large']], {})).
+      getWorkerNodes([['m5.large'], ['m5.large']], [
+        {
+          "type": "m5.4xlarge",
+          "priceOnDemand": "0.384",
+          "vcpu": "8",
+          "memory": "256 GiB",
+          "price3yr": "43003",
+          "price1yr": "22417"
+        }])).
       toThrowErrorMatchingInlineSnapshot(`"CSV header missing: ec2_type"`)
   })
 })

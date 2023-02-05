@@ -5,8 +5,8 @@
     "ts-node": "^10.9.1"
   },
   "scripts": {
-    "cost": "ts-node index.ts --coverage",
-    "test": "jest"
+    "cost": "ts-node index.ts",
+    "test": "jest --coverage"
   },
   "devDependencies": {
     "@jest/globals": "^29.4.1",

@@ -1,2 +1,4 @@
 data/
+!data/rosa-pricing-page/cost-estimated-generated.csv
+!data/rosa-pricing-page/rosa-pricing-example-ondemand.csv
 coverage/

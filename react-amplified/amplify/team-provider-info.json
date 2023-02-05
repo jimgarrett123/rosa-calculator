@@ -1,0 +1,46 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-calculator-dev-95619-authRole",
+      "UnauthRoleArn": "arn:aws:iam::898058419606:role/amplify-calculator-dev-95619-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::898058419606:role/amplify-calculator-dev-95619-authRole",
+      "Region": "ap-southeast-2",
+      "DeploymentBucketName": "amplify-calculator-dev-95619-deployment",
+      "UnauthRoleName": "amplify-calculator-dev-95619-unauthRole",
+      "StackName": "amplify-calculator-dev-95619",
+      "StackId": "arn:aws:cloudformation:ap-southeast-2:898058419606:stack/amplify-calculator-dev-95619/85941af0-a4e7-11ed-9cb7-02d59df9129e",
+      "AmplifyAppId": "d2zfr8f7mze8kh",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-calculator-dev-95619-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
+    },
+    "categories": {
+      "function": {
+        "calculator0069a04fCustomMessage": {
+          "REDIRECTURL": "",
+          "EMAILSUBJECT": "OpenShift Cost Calculator - access request ",
+          "EMAILMESSAGE": "",
+          "deploymentBucketName": "amplify-calculator-dev-95619-deployment",
+          "s3Key": "amplify-builds/calculator0069a04fCustomMessage-41456535486756356d70-build.zip"
+        },
+        "calculator0069a04fPreSignup": {
+          "DOMAINALLOWLIST": "amazon.com",
+          "deploymentBucketName": "amplify-calculator-dev-95619-deployment",
+          "s3Key": "amplify-builds/calculator0069a04fPreSignup-77565456625a774e394f-build.zip"
+        },
+        "calculator04a695f9PreSignup": {
+          "DOMAINALLOWLIST": "amazon.com",
+          "deploymentBucketName": "amplify-calculator-dev-95619-deployment",
+          "s3Key": "amplify-builds/calculator04a695f9PreSignup-674f55744f54574d5668-build.zip"
+        }
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2zfr8f7mze8kh",
+          "type": "manual"
+        }
+      },
+      "auth": {
+        "calculator04a695f9": {}
+      }
+    }
+  }
+}
