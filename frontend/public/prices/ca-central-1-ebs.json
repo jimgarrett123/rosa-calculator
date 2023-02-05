@@ -1,0 +1,126 @@
+{
+  "Storage General Purpose GB Mo": {
+    "rateCode": "SCGZGXF4WUZ74Q7A.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1100000000"
+  },
+  "Storage Provisioned IOPS GB Mo": {
+    "rateCode": "WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1380000000"
+  },
+  "Storage Cold HDD GB Mo": {
+    "rateCode": "2RMYARQP542XZSAG.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0168000000"
+  },
+  "Storage Throughput Optimized HDD GB Mo": {
+    "rateCode": "K7JR7Z67TRDKP4FP.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0500000000"
+  },
+  "Storage Magnetic GB Mo": {
+    "rateCode": "AREZ2CPJ9X598EDF.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0550000000"
+  },
+  "Storage General Purpose gp2 GB Mo": {
+    "rateCode": "SCGZGXF4WUZ74Q7A.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1100000000"
+  },
+  "Storage General Purpose gp3 GB Mo": {
+    "rateCode": "DQ3VBGBXYAYM4JS5.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0880000000"
+  },
+  "Storage Provisioned IOPS io1 GB Mo": {
+    "rateCode": "WQGC34PB2AWS8R4U.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1380000000"
+  },
+  "Storage Provisioned IOPS io2 GB month": {
+    "rateCode": "GGVDWRCKRADNFANN.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1380000000"
+  },
+  "Storage Provisioned IOPS io2 GB Mo": {
+    "rateCode": "GGVDWRCKRADNFANN.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.1380000000"
+  },
+  "Storage Cold HDD sc1 GB Mo": {
+    "rateCode": "2RMYARQP542XZSAG.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0168000000"
+  },
+  "Storage Throughput Optimized HDD st1 GB Mo": {
+    "rateCode": "K7JR7Z67TRDKP4FP.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0500000000"
+  },
+  "Storage Magnetic standard GB Mo": {
+    "rateCode": "AREZ2CPJ9X598EDF.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0550000000"
+  },
+  "Storage Snapshot Amazon S3 GB Mo": {
+    "rateCode": "5XUGBZ7CGY6QRFRD.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0550000000"
+  },
+  "Storage Snapshot Amazon S3 SnapshotArchiveEarlyDelete GB Mo": {
+    "rateCode": "GMUJG852KH5GPHQR.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0137500000"
+  },
+  "Storage Snapshot Amazon S3 SnapshotArchiveRetrieval GB": {
+    "rateCode": "ZQFSNE38RW3NUKQK.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0330000000"
+  },
+  "Storage Snapshot Amazon S3 SnapshotArchiveStorage GB Mo": {
+    "rateCode": "JXZM9CVSP9KSWNPB.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0137500000"
+  },
+  "Storage Snapshot Amazon S3 Outpost GB Mo": {
+    "rateCode": "7NZJZYNX3TTJ2XST.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0290000000"
+  },
+  "Provisioned Throughput gp3 per GiBps mo": {
+    "rateCode": "VZ2BZZ3HA56WFNDY.JRTCKXETXF.6YS6EN2CT7",
+    "price": "45.0560000000"
+  },
+  "Provisioned EBS IOPS Volumes per IOPS Mo": {
+    "rateCode": "8U7ZW6PSQ5EDM4QQ.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0720000000"
+  },
+  "Provisioned EBS I O Requests Volumes per IOs": {
+    "rateCode": "CZVVVA2KJZH4G2ZR.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0000000550"
+  },
+  "Provisioned EBS IOPS gp3 Volumes per IOPS Mo": {
+    "rateCode": "AWX392ZW72JQE3CB.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0055000000"
+  },
+  "Provisioned EBS IOPS io1 Volumes per IOPS Mo": {
+    "rateCode": "8U7ZW6PSQ5EDM4QQ.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0720000000"
+  },
+  "Provisioned EBS IOPS io2 Volumes per IOPS Mo": {
+    "rateCode": "27UPQQMP476R7JTA.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0720000000"
+  },
+  "Provisioned EBS IOPS Tier 2 io2 Volumes per IOPS Mo": {
+    "rateCode": "DSD2K6C4T5PPQGXW.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0504000000"
+  },
+  "Provisioned EBS IOPS Tier 3 io2 Volumes per IOPS Mo": {
+    "rateCode": "NF3T9ZXBWBM4VZTW.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0352800000"
+  },
+  "Provisioned EBS I O Requests standard Volumes per IOs": {
+    "rateCode": "CZVVVA2KJZH4G2ZR.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0000000550"
+  },
+  "Get Requests for EBS direct APIs per SnapshotAPIUnits": {
+    "rateCode": "5DQ2KF486ZXZSTX7.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0000033000"
+  },
+  "List Requests for EBS direct APIs per Requests": {
+    "rateCode": "TETE9KUSS3TZ6HQE.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0000007000"
+  },
+  "Put Requests for EBS direct APIs per SnapshotAPIUnits": {
+    "rateCode": "5BZHZ4Z2PYMGP88U.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.0000070000"
+  },
+  "Fast Snapshot Restore per hours": {
+    "rateCode": "3M7Y7924VRKXP4AE.JRTCKXETXF.6YS6EN2CT7",
+    "price": "0.8250000000"
+  }
+}

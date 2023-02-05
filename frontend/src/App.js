@@ -1,54 +1,40 @@
-import "./App.scss";
-import React, { useEffect, useState } from "react";
-import { Routes, Route } from "react-router-dom";
-import ScrollToTop from "./components/ScrollToTop";
-import SideBar from "./components/SideBar";
-import Footer from "./components/Footer";
-import usePageTracking from "./components/usePageTracking";
-import Calculator from "./components/Calculator";
+// Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
+// SPDX-License-Identifier: MIT-0
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import React, { useState, useRef } from 'react';
+import { Breadcrumbs, ToolsContent } from './pages/cards/common-components';
+import { CustomAppLayout, Navigation } from './pages/commons/common-components';
+import { TableSelectFilter } from './pages/table-select-filter';
+import './styles/base.scss';
 
-const defaultAppContext = {
-  menu: {
-    showWorkshops: true,
-    showUpcomingEvents: true,
-  },
-  data: {
-    workshops: []
-  }
-}
-export const AppContext = React.createContext();
+import awsExports from './aws-exports';
+Amplify.configure(awsExports);
 
-function App() {
-  const [appContext, setAppContext] = useState(defaultAppContext)
-
-  usePageTracking();
-
-  useEffect(() => {
-    document.body.classList.remove("is-preload");
-  }, []);
+const App = ({ signOut, user }) => {
+  const [toolsOpen, setToolsOpen] = useState(false);
+  const appLayout = useRef();
 
   return (
-    <div>
-      <AppContext.Provider value={[appContext, setAppContext]}>
-
-        <ScrollToTop />
-        <SideBar />
-        <main role="main">
-          <div id="content" className="container">
-            <Routes>
-              <Route
-                path="/"
-                element={
-                  <Calculator />
-                }
-              />
-            </Routes>
-          </div>
-          <Footer />
-        </main>
-      </AppContext.Provider>
-    </div>
+    <CustomAppLayout
+      ref={appLayout}
+      navigation={<Navigation activeHref="#/instances" />}
+      breadcrumbs={<Breadcrumbs />}
+      content={
+        <TableSelectFilter
+          loadHelpPanelContent={() => {
+            appLayout.current?.focusToolsClose();
+            setToolsOpen(true);
+          }}
+        />
+      }
+      contentType="table"
+      tools={<ToolsContent />}
+      toolsOpen={toolsOpen}
+      onToolsChange={({ detail }) => setToolsOpen(detail.open)}
+    />
   );
-}
+};
 
-export default App;
+export default withAuthenticator(App);

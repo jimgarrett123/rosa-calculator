@@ -14,7 +14,7 @@ def get_region_full_name(region_code):
         raise Exception("Region \"" + region_code + "\" not found in " + region_file)
 
 
-def get_ec2_products(ec2_type, ec2_plan, region_name):
+def get_ec2_products(ec2_type, region_name):
     paginator = client.get_paginator('get_products')
 
     response_iterator = paginator.paginate(
@@ -49,11 +49,6 @@ def get_ec2_products(ec2_type, ec2_plan, region_name):
                 'Type': 'TERM_MATCH',
                 'Field': 'operatingSystem',
                 'Value': 'Linux'
-            },
-            {
-                'Type': 'TERM_MATCH',
-                'Field': 'offerTermCode',
-                'Value': ec2_plan
             }
         ],
         PaginationConfig={
@@ -67,30 +62,42 @@ def get_ec2_products(ec2_type, ec2_plan, region_name):
             priceItemJson = json.loads(priceItem)
             products.append(priceItemJson)
 
-    onDemandProducts = products[0]['terms']['OnDemand']
     vcpu = products[0]['product']['attributes']['vcpu']
     memory = products[0]['product']['attributes']['memory']
-    if (len(onDemandProducts.keys()) == 1):
-        onDemandProduct = (list(onDemandProducts.values())
-                           [0]['priceDimensions'])
 
-        return {
-            ec2_type: list(onDemandProduct.values())[0]['pricePerUnit']['USD'],
-            "vcpu": vcpu,
-            "memory": memory
-        }
+    onDemandProducts = products[0]['terms']['OnDemand']
+    onDemandProductData = (list(onDemandProducts.values())
+                        [0]['priceDimensions'])
+
+    product = {
+        "type": ec2_type,
+        "priceOnDemand": list(onDemandProductData.values())[0]['pricePerUnit']['USD'],
+        "vcpu": vcpu,
+        "memory": memory
+    }
+
+    reservedProducts = products[0]['terms']['Reserved']
+    for key in reservedProducts.keys():
+        if reservedProducts[key]['termAttributes']['PurchaseOption'] != 'All Upfront':
+            continue 
+        if reservedProducts[key]['termAttributes']['OfferingClass'] != 'standard':
+            continue
+        
+        product['price' + reservedProducts[key]['termAttributes']['LeaseContractLength']] = (list(list(reservedProducts[key].values())[0].values())[0]['pricePerUnit']['USD'])
+    
+    return product
 
 if __name__ == '__main__':
 
     arg_ec2_types = ""
     arg_region_code = ""
     arg_ec2_plan = ""
-    arg_help = "{0} -e <ec2-instance-types-comma-separated> -r <region> -c <code-ondemand: JRTCKXETXF, 1 year: 6QCMYABX3D>".format(
+    arg_help = "{0} -e <ec2-instance-types-comma-separated> -r <region>".format(
         sys.argv[0])
 
     try:
         opts, args = getopt.getopt(sys.argv[1:], "h:e:r:c:", ["help", "ec2-instance-types=",
-                                                              "region=", 'ec2-code='])
+                                                              "region="])
     except:
         print(arg_help)
         sys.exit(2)
@@ -103,8 +110,6 @@ if __name__ == '__main__':
             arg_ec2_types = arg
         elif opt in ("-r", "--region"):
             arg_region_code = arg
-        elif opt in ("-c", "--code"):  # on-demand code: JRTCKXETXF, 1 year: 6QCMYABX3D
-            arg_ec2_plan = arg
     ec2_types = arg_ec2_types.split(',')
     region_name = get_region_full_name(arg_region_code)
     client = boto3.client('pricing',  region_name='us-east-1')
@@ -113,9 +118,9 @@ if __name__ == '__main__':
     with open('error.log', 'a') as error_file:
         for ec2_type in ec2_types:
             try:
-                product = get_ec2_products(ec2_type, arg_ec2_plan, region_name)
+                product = get_ec2_products(ec2_type, region_name)
                 results.append(product)
             except:
-                error_file.write("[error] " + ec2_type + '/' + arg_ec2_plan + '/' + region_name + '\n') 
+                error_file.write("[error] " + ec2_type + '/' + region_name + '\n') 
 
         print(json.dumps(results))

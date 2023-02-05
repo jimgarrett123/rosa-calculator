@@ -29,7 +29,7 @@ bash run.sh
 ...
 ```
 
-#### Option 2: retrieve prices for a given region, EC2 term, EC2 instance types or for EBS volumes
+#### Option 2: retrieve prices for a given region,  EC2 instance types or for EBS volumes
 
 Prerequisites: python3
 
@@ -37,13 +37,11 @@ Usage:
 
 - `<region-code>`: AWS Region ID (eg, `us-east-1`)
 - `<ec2-types>`: Comma-separated list of EC2 instance types (eg, `m5.xlarge,r5.2xlarge`)
-- `<ec2-term>`: EC2 term - accepted values: `JRTCKXETXF` (On-Demand) and `6QCMYABX3D` (1 year)
 
 ```bash
 python3 prices-ec2.py \
   -r <region-code> \
-  -e <ec2-types> \
-  -c <ec2-term>
+  -e <ec2-types>
 ```
 
 Example:
@@ -51,8 +49,7 @@ Example:
 ```bash
 python3 prices-ec2.py \
   -r us-east-1 \
-  -e m5.xlarge,r5.2xlarge,r5.4xlarge,m5.2xlarge,r5.xlarge,m5.2xlarge \
-  -c 6QCMYABX3D
+  -e m5.xlarge,r5.2xlarge,r5.4xlarge,m5.2xlarge,r5.xlarge,m5.2xlarge 
 ```
 
 This command returns a JSON as per following example of output:

@@ -27,16 +27,11 @@ function get_price() {
     jq . "${OUT_FILE}" > temp && mv temp "${OUT_FILE}"
     echo  "[${PRICE_REGION}] output file: ${OUT_FILE}"
 
-    OUT_FILE="out/$PRICE_REGION-ondemand.json"
-    python3 prices-ec2.py -r "$PRICE_REGION" -e "${EC2_TYPES}" -c JRTCKXETXF > "${OUT_FILE}"
+    OUT_FILE="out/$PRICE_REGION-ec2.json"
+    python3 prices-ec2.py -r "$PRICE_REGION" -e "${EC2_TYPES}" > "${OUT_FILE}"
     jq . "${OUT_FILE}" > temp && mv temp "${OUT_FILE}"
     echo  "[${PRICE_REGION}] output file: ${OUT_FILE}"
     sleep 5
-
-    OUT_FILE="out/$PRICE_REGION-1year.json"
-    python3 prices-ec2.py -r "$PRICE_REGION" -e "${EC2_TYPES}" -c 6QCMYABX3D > "${OUT_FILE}"
-    jq . "${OUT_FILE}" > temp && mv temp "${OUT_FILE}"
-    echo  "[${PRICE_REGION}] output file: ${OUT_FILE}"
 }
 rosa list instance-types -o json | jq -r ".[].id" > data/rosa-ec2.json
 ROSA_EC2_TYPES_DATA=$(cat data/rosa-ec2.json)
