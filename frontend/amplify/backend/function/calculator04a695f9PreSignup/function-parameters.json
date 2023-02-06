@@ -11,6 +11,6 @@
   "triggerEventPath": "PreSignup.event.json",
   "roleName": "calculator04a695f9PreSignup",
   "skipEdit": true,
-  "DOMAINALLOWLIST": "amazon.com",
+  "DOMAINALLOWLIST": "amazon.com, amazon.it",
   "enableCors": false
 }

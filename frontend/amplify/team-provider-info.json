@@ -22,12 +22,12 @@
           "s3Key": "amplify-builds/calculator0069a04fCustomMessage-41456535486756356d70-build.zip"
         },
         "calculator0069a04fPreSignup": {
-          "DOMAINALLOWLIST": "amazon.com",
+          "DOMAINALLOWLIST": "amazon.com, amazon.it",
           "deploymentBucketName": "amplify-calculator-dev-95619-deployment",
           "s3Key": "amplify-builds/calculator0069a04fPreSignup-77565456625a774e394f-build.zip"
         },
         "calculator04a695f9PreSignup": {
-          "DOMAINALLOWLIST": "amazon.com",
+          "DOMAINALLOWLIST": "amazon.com, amazon.it",
           "deploymentBucketName": "amplify-calculator-dev-95619-deployment",
           "s3Key": "amplify-builds/calculator04a695f9PreSignup-674f55744f54574d5668-build.zip"
         }
