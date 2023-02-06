@@ -98,32 +98,3 @@ function DetailsCards({ loadHelpPanelContent }) {
     />
   );
 }
-
-function App() {
-  const [toolsOpen, setToolsOpen] = useState(false);
-  const appLayout = useRef();
-  return (
-    <CustomAppLayout
-      ref={appLayout}
-      navigation={<Navigation activeHref="#/distributions" />}
-      notifications={<Notifications successNotification={true} />}
-      breadcrumbs={<Breadcrumbs />}
-      content={
-        <DetailsCards
-          loadHelpPanelContent={() => {
-            setToolsOpen(true);
-            appLayout.current?.focusToolsClose();
-          }}
-        />
-      }
-      contentType="cards"
-      tools={<ToolsContent />}
-      toolsOpen={toolsOpen}
-      onToolsChange={({ detail }) => setToolsOpen(detail.open)}
-      stickyNotifications={true}
-    />
-  );
-}
-
-const root = createRoot(document.getElementById('app'));
-root.render(<App />);

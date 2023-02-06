@@ -59,7 +59,7 @@ function prepareSelectRegion(field, defaultOption) {
   return options;
 }
 
-export function TableSelectFilter({ loadHelpPanelContent }) {
+export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
   const [columnDefinitions, saveWidths] = useColumnWidths('React-TableSelectFilter-Widths', COLUMN_DEFINITIONS);
   const [region, setRegion] = useState(defaultRegion);
 
@@ -105,6 +105,7 @@ export function TableSelectFilter({ loadHelpPanelContent }) {
     setTableItems(instances);
   };
   const refreshButtonProps = { onClick: onRefresh };
+  const logoutButtonProps = { onClick: signOut };
 
   useLayoutEffect(() => {
     collectionProps.ref.current?.scrollToTop();
@@ -149,9 +150,12 @@ export function TableSelectFilter({ loadHelpPanelContent }) {
               selectedItemsCount={collectionProps.selectedItems.length}
               counter={getHeaderCounterText(tableItems, collectionProps.selectedItems)}
               extraActions={
-                <Button data-testid="header-btn-view-details" {...refreshButtonProps}>
-                  Reset instances
-                </Button>
+                <>
+                  <Button data-testid="header-btn-view-details" {...refreshButtonProps}>
+                    Reset instances
+                  </Button>
+                  <Button {...logoutButtonProps}>Logout</Button>
+                </>
               }
               onInfoLinkClick={loadHelpPanelContent}
             />

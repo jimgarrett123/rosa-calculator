@@ -27,8 +27,11 @@ const App = ({ signOut, user }) => {
             appLayout.current?.focusToolsClose();
             setToolsOpen(true);
           }}
+          signOut={signOut}
         />
       }
+      signOut={signOut}
+      user={user}
       contentType="table"
       tools={<ToolsContent />}
       toolsOpen={toolsOpen}
