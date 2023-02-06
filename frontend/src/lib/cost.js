@@ -241,7 +241,6 @@ export function getWorkerNodes(nodesConfig, ec2s) {
   const nodes = [];
   for (const row of nodesConfig) {
     const ec2Type = row[0];
-    console.log(ec2s);
     const ec2 = (ec2s || []).find(ec2 => ec2.type === ec2Type);
     if (!ec2) {
       return { error: `EC2 type "${ec2Type}" not found in the Price API data` };

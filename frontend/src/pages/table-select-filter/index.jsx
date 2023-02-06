@@ -167,7 +167,6 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
 
                 const workerNodes = getWorkerNodes(nodes, resultEC2);
 
-                console.log(workerNodes);
                 if (workerNodes.error) {
                   setError(workerNodes.error);
                   setErrorReason('You can try to add / select other instance types');
