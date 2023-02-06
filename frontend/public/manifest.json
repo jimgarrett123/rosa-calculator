@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "OpenShift on AWS Calculator",
+  "name": "OpenShift on AWS Calculator for Red Hat OpenShift Services on AWS (ROSA) and OpenShift Container Platform (OCP)",
   "icons": [
     {
       "src": "favicon.ico",
