@@ -224,11 +224,13 @@ export function getEstimate(workerNodes, infraNodesCount, ec2Prices, ebsPrices) 
 
 export function getWorkerNodes(nodesConfig, ec2s) {
   if (nodesConfig.length < 2) {
-    throw new Error('No EC2 instances added');
+    return {
+      error: 'No EC2 instances added',
+    };
   }
 
   if (nodesConfig[0][0] !== 'ec2_type') {
-    throw new Error('CSV header missing: ec2_type');
+    return { error: 'CSV header missing: ec2_type' };
   }
   nodesConfig.shift(); // remove csv headers
 
@@ -239,9 +241,10 @@ export function getWorkerNodes(nodesConfig, ec2s) {
   const nodes = [];
   for (const row of nodesConfig) {
     const ec2Type = row[0];
-    const ec2 = ec2s.find(ec2 => ec2.type === ec2Type);
+    console.log(ec2s);
+    const ec2 = (ec2s || []).find(ec2 => ec2.type === ec2Type);
     if (!ec2) {
-      throw new Error(`EC2 type "${ec2Type}" not found in the Price API data`);
+      return { error: `EC2 type "${ec2Type}" not found in the Price API data` };
     }
 
     nodes.push({

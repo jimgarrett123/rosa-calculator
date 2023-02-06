@@ -127,28 +127,9 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
   const [errorReason, setErrorReason] = useState();
 
   useLayoutEffect(() => {
-    const nodes = [['ec2_type']];
-
-    tableItems.forEach(element => {
-      if (element.count > 0) {
-        for (let i = 0; i < element.count; i++) {
-          nodes.push([element.id]);
-        }
-      }
-    });
-
-    let workerNodes = [];
-
-    try {
-      workerNodes = getWorkerNodes(nodes, ec2Prices);
-    } catch (e) {
-      if (nodes.length > 0) {
-        setError(e.message);
-        setErrorReason('You can try to add / select other instance types');
-        return;
-      }
+    if (!region.value) {
+      return;
     }
-
     fetch(`/prices/${region.value}-ebs.json`)
       .then(res => res.json(), {
         headers: {
@@ -157,8 +138,8 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
         },
       })
       .then(
-        result => {
-          setEBSPrices(result);
+        resultEbs => {
+          setEBSPrices(resultEbs);
 
           fetch(`/prices/${region.value}-ec2.json`)
             .then(res => res.json(), {
@@ -168,14 +149,33 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
               },
             })
             .then(
-              result => {
-                setEC2Prices(result);
+              resultEC2 => {
+                setEC2Prices(resultEC2);
 
-                setNodes(workerNodes);
-                setEstimateMultiAz(getEstimate(workerNodes, 3, ec2Prices, ebsPrices));
-                setEstimateSingleAz(getEstimate(workerNodes, 2, ec2Prices, ebsPrices));
+                const nodes = [['ec2_type']];
+
+                tableItems.forEach(element => {
+                  if (element.count > 0) {
+                    for (let i = 0; i < element.count; i++) {
+                      nodes.push([element.id]);
+                    }
+                  }
+                });
+
                 setError(null);
                 setErrorReason(null);
+
+                const workerNodes = getWorkerNodes(nodes, resultEC2);
+
+                console.log(workerNodes);
+                if (workerNodes.error) {
+                  setError(workerNodes.error);
+                  setErrorReason('You can try to add / select other instance types');
+                } else {
+                  setNodes(workerNodes);
+                  setEstimateMultiAz(getEstimate(workerNodes, 3, resultEC2, resultEbs));
+                  setEstimateSingleAz(getEstimate(workerNodes, 2, resultEC2, resultEbs));
+                }
               },
               error => {
                 setError(error);
@@ -187,7 +187,7 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
         }
       );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [region, tableItems]);
+  }, [region, setRegion, tableItems, setTableItems]);
 
   const handleSubmit = (currentItem, column, value) => {
     // await new Promise(resolve => setTimeout(resolve, 1500));

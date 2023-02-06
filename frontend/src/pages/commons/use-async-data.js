@@ -16,6 +16,7 @@ export function useAsyncData(loadCallback) {
     return () => {
       rendered = false;
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return [items, loading];

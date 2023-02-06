@@ -19,7 +19,7 @@ export function EstimateView(props) {
     );
   }
 
-  if (!nodes || nodes.length === 0) {
+  if (!nodes || nodes.length === 0 || !region) {
     return (
       <Alert statusIconAriaLabel="Info" header={'Verify your configuration'}>
         To include you worker node sizes in the estimate,
