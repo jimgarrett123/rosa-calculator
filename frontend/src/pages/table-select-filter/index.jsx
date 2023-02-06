@@ -1,6 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import React, { useLayoutEffect, useState } from 'react';
+
 import { useCollection } from '@cloudscape-design/collection-hooks';
 import {
   COLUMN_DEFINITIONS,
@@ -21,6 +22,7 @@ import Tabs from '@cloudscape-design/components/tabs';
 import Container from '@cloudscape-design/components/container';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import { Button } from '@cloudscape-design/components';
+import { getWorkerNodes, getEstimate } from '../../lib/cost';
 
 import { EstimateView } from './EstimateView';
 
@@ -116,8 +118,79 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
     setRegion(defaultRegion);
   }
 
-  const handleSubmit = async (currentItem, column, value) => {
-    await new Promise(resolve => setTimeout(resolve, 1500));
+  const [estimateMultiAz, setEstimateMultiAz] = useState();
+  const [estimateSingleAz, setEstimateSingleAz] = useState();
+  const [nodes, setNodes] = useState();
+  const [ebsPrices, setEBSPrices] = useState();
+  const [ec2Prices, setEC2Prices] = useState();
+  const [error, setError] = useState();
+  const [errorReason, setErrorReason] = useState();
+
+  useLayoutEffect(() => {
+    const nodes = [['ec2_type']];
+
+    tableItems.forEach(element => {
+      if (element.count > 0) {
+        for (let i = 0; i < element.count; i++) {
+          nodes.push([element.id]);
+        }
+      }
+    });
+
+    let workerNodes = [];
+
+    try {
+      workerNodes = getWorkerNodes(nodes, ec2Prices);
+    } catch (e) {
+      if (nodes.length > 0) {
+        setError(e.message);
+        setErrorReason('You can try to add / select other instance types');
+        return;
+      }
+    }
+
+    fetch(`/prices/${region.value}-ebs.json`)
+      .then(res => res.json(), {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+        },
+      })
+      .then(
+        result => {
+          setEBSPrices(result);
+
+          fetch(`/prices/${region.value}-ec2.json`)
+            .then(res => res.json(), {
+              headers: {
+                'Content-Type': 'application/json',
+                Accept: 'application/json',
+              },
+            })
+            .then(
+              result => {
+                setEC2Prices(result);
+
+                setNodes(workerNodes);
+                setEstimateMultiAz(getEstimate(workerNodes, 3, ec2Prices, ebsPrices));
+                setEstimateSingleAz(getEstimate(workerNodes, 2, ec2Prices, ebsPrices));
+                setError(null);
+                setErrorReason(null);
+              },
+              error => {
+                setError(error);
+              }
+            );
+        },
+        error => {
+          setError(error);
+        }
+      );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [region, tableItems]);
+
+  const handleSubmit = (currentItem, column, value) => {
+    // await new Promise(resolve => setTimeout(resolve, 1500));
     let fullCollection = tableItems;
 
     const newItem = { ...currentItem, [column.id]: value };
@@ -223,7 +296,17 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
         />
         {region.value && (
           <Container>
-            <EstimateTabs tableItems={tableItems} region={region.value} />
+            <EstimateTabs
+              tableItems={tableItems}
+              region={region.value}
+              estimateMultiAz={estimateMultiAz}
+              estimateSingleAz={estimateSingleAz}
+              nodes={nodes}
+              ebsPrices={ebsPrices}
+              ec2Prices={ec2Prices}
+              error={error}
+              errorReason={errorReason}
+            />
           </Container>
         )}
       </SpaceBetween>
@@ -232,14 +315,13 @@ export function TableSelectFilter({ loadHelpPanelContent, signOut }) {
 }
 
 function EstimateTabs(props) {
-  const { tableItems, region } = props;
   return (
     <Tabs
       tabs={[
         {
           label: 'Red Hat OpenShift Service on AWS',
           id: 'rosa',
-          content: <EstimateView tableItems={tableItems} region={region} />,
+          content: <EstimateView {...props} />,
         },
         {
           label: 'OpenShift Container Platform (OCP)',

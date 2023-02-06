@@ -1,83 +1,14 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Table } from '@cloudscape-design/components';
 import SpaceBetween from '@cloudscape-design/components/space-between';
 import Alert from '@cloudscape-design/components/alert';
-import { getWorkerNodes, getEstimate } from '../../lib/cost';
 import Box from '@cloudscape-design/components/box';
 
 export function EstimateView(props) {
-  const { tableItems, region } = props;
-
-  const [estimateMultiAz, setEstimateMultiAz] = useState();
-  const [estimateSingleAz, setEstimateSingleAz] = useState();
-  const [nodes, setNodes] = useState();
-  const [ebsPrices, setEBSPrices] = useState();
-  const [ec2Prices, setEC2Prices] = useState();
-  const [error, setError] = useState();
-  const [errorReason, setErrorReason] = useState();
-
-  useEffect(() => {
-    const nodes = [['ec2_type']];
-
-    tableItems.forEach(element => {
-      if (element.count > 0) {
-        for (let i = 0; i < element.count; i++) {
-          nodes.push([element.id]);
-        }
-      }
-    });
-
-    let workerNodes = [];
-
-    try {
-      workerNodes = getWorkerNodes(nodes, ec2Prices);
-    } catch (e) {
-      if (nodes.length > 0) {
-        setError(e.message);
-        setErrorReason('You can try to add / select other instance types');
-      }
-    }
-
-    fetch(`/prices/${region}-ebs.json`)
-      .then(res => res.json(), {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
-      })
-      .then(
-        result => {
-          setEBSPrices(result);
-
-          fetch(`/prices/${region}-ec2.json`)
-            .then(res => res.json(), {
-              headers: {
-                'Content-Type': 'application/json',
-                Accept: 'application/json',
-              },
-            })
-            .then(
-              result => {
-                setEC2Prices(result);
-
-                setNodes(workerNodes);
-                setEstimateMultiAz(getEstimate(workerNodes, 3, ec2Prices, ebsPrices));
-                setEstimateSingleAz(getEstimate(workerNodes, 2, ec2Prices, ebsPrices));
-                setError(null);
-                setErrorReason(null);
-              },
-              error => {
-                setError(error);
-              }
-            );
-        },
-        error => {
-          setError(error);
-        }
-      );
-  }, [ebsPrices, ec2Prices, region, tableItems]);
+  const { estimateMultiAz, estimateSingleAz, tableItems, nodes, ebsPrices, ec2Prices, error, errorReason, region } =
+    props;
 
   if (error) {
     return (

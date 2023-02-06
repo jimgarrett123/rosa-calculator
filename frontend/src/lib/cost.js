@@ -30,7 +30,7 @@ export function getEstimate(workerNodes, infraNodesCount, ec2Prices, ebsPrices) 
     ec2TypeInfra = 'r5.4xlarge';
   }
 
-  const ec2Infra = ec2Prices.find(ec2 => ec2.type === ec2TypeInfra);
+  const ec2Infra = (ec2Prices || []).find(ec2 => ec2.type === ec2TypeInfra);
 
   if (!ec2Infra) {
     throw new Error(`Infra node price not found (EC2 type: ${ec2TypeInfra})`);
@@ -47,7 +47,7 @@ export function getEstimate(workerNodes, infraNodesCount, ec2Prices, ebsPrices) 
     ec2TypeControlPlane = 'm5.8xlarge';
   }
 
-  const ec2Cplane = ec2Prices.find(ec2 => ec2.type === ec2TypeControlPlane);
+  const ec2Cplane = (ec2Prices || []).find(ec2 => ec2.type === ec2TypeControlPlane);
 
   if (!ec2Cplane) {
     throw new Error(`Control plane node price not found (EC2 type: ${ec2TypeControlPlane})`);
