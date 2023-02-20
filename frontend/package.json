@@ -65,7 +65,7 @@
   },
   "scripts": {
     "webpack": "cross-env NODE_ENV=development webpack-dev-server",
-    "start": "react-scripts start",
+    "start": "cp ../price/out/* public/prices/ && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
