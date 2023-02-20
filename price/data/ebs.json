@@ -2,9 +2,9 @@
   "manifest": {
     "serviceId": "ec2",
     "accessType": "publish",
-    "esIndex": "plc-ec2-usd-20230127181505",
-    "hawkFilePublicationDate": "2023-01-27T18:15:05Z",
-    "ETLIngestionTriggerDate": "2023-01-27T18:15:05Z",
+    "esIndex": "plc-ec2-usd-20230216180653",
+    "hawkFilePublicationDate": "2023-02-16T18:06:53Z",
+    "ETLIngestionTriggerDate": "2023-02-16T18:06:53Z",
     "currencyCode": "USD",
     "source": "ebs-calculator"
   },

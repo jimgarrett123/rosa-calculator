@@ -12,8 +12,8 @@
     "priceOnDemand": "0.2112000000",
     "vcpu": "4",
     "memory": "16 GiB",
-    "price1yr": "0.0000000000",
-    "price3yr": "0.0000000000"
+    "price1yr": "1086",
+    "price3yr": "2046"
   },
   {
     "type": "c5.12xlarge",
@@ -21,7 +21,7 @@
     "vcpu": "48",
     "memory": "96 GiB",
     "price3yr": "23241",
-    "price1yr": "0.0000000000"
+    "price1yr": "12115"
   },
   {
     "type": "c5.18xlarge",
@@ -44,7 +44,7 @@
     "priceOnDemand": "0.3920000000",
     "vcpu": "8",
     "memory": "16 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "2019",
     "price3yr": "3873"
   },
   {
@@ -84,15 +84,15 @@
     "priceOnDemand": "5.3760000000",
     "vcpu": "96",
     "memory": "192 GiB",
-    "price1yr": "0.0000000000",
-    "price3yr": "0.0000000000"
+    "price1yr": "27691",
+    "price3yr": "53122"
   },
   {
     "type": "c5d.2xlarge",
     "priceOnDemand": "0.4480000000",
     "vcpu": "8",
     "memory": "16 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "2308",
     "price3yr": "4427"
   },
   {
@@ -117,7 +117,7 @@
     "vcpu": "96",
     "memory": "192 GiB",
     "price1yr": "27691",
-    "price3yr": "0.0000000000"
+    "price3yr": "53122"
   },
   {
     "type": "c5d.xlarge",
@@ -157,7 +157,7 @@
     "vcpu": "48",
     "memory": "192 GiB",
     "price3yr": "28458",
-    "price1yr": "0.0000000000"
+    "price1yr": "14835"
   },
   {
     "type": "m5.16xlarge",
@@ -165,7 +165,7 @@
     "vcpu": "64",
     "memory": "256 GiB",
     "price1yr": "19779",
-    "price3yr": "0.0000000000"
+    "price3yr": "37944"
   },
   {
     "type": "m5.24xlarge",
@@ -205,7 +205,7 @@
     "vcpu": "96",
     "memory": "384 GiB",
     "price3yr": "66877",
-    "price1yr": "0.0000000000"
+    "price1yr": "34861"
   },
   {
     "type": "m5.metal",
@@ -224,6 +224,78 @@
     "price1yr": "1236"
   },
   {
+    "type": "m6i.12xlarge",
+    "priceOnDemand": "2.8800000000",
+    "vcpu": "48",
+    "memory": "192 GiB",
+    "price1yr": "15576",
+    "price3yr": "29881"
+  },
+  {
+    "type": "m6i.16xlarge",
+    "priceOnDemand": "3.8400000000",
+    "vcpu": "64",
+    "memory": "256 GiB",
+    "price3yr": "39841",
+    "price1yr": "20768"
+  },
+  {
+    "type": "m6i.24xlarge",
+    "priceOnDemand": "5.7600000000",
+    "vcpu": "96",
+    "memory": "384 GiB",
+    "price1yr": "31153",
+    "price3yr": "59762"
+  },
+  {
+    "type": "m6i.2xlarge",
+    "priceOnDemand": "0.4800000000",
+    "vcpu": "8",
+    "memory": "32 GiB",
+    "price1yr": "2596",
+    "price3yr": "4980"
+  },
+  {
+    "type": "m6i.32xlarge",
+    "priceOnDemand": "7.6800000000",
+    "vcpu": "128",
+    "memory": "512 GiB",
+    "price1yr": "41537",
+    "price3yr": "79683"
+  },
+  {
+    "type": "m6i.4xlarge",
+    "priceOnDemand": "0.9600000000",
+    "vcpu": "16",
+    "memory": "64 GiB",
+    "price3yr": "9960",
+    "price1yr": "5192"
+  },
+  {
+    "type": "m6i.8xlarge",
+    "priceOnDemand": "1.9200000000",
+    "vcpu": "32",
+    "memory": "128 GiB",
+    "price1yr": "10384",
+    "price3yr": "19921"
+  },
+  {
+    "type": "m6i.metal",
+    "priceOnDemand": "7.6800000000",
+    "vcpu": "128",
+    "memory": "512 GiB",
+    "price3yr": "79683",
+    "price1yr": "41537"
+  },
+  {
+    "type": "m6i.xlarge",
+    "priceOnDemand": "0.2400000000",
+    "vcpu": "4",
+    "memory": "16 GiB",
+    "price3yr": "2490",
+    "price1yr": "1298"
+  },
+  {
     "type": "r5.12xlarge",
     "priceOnDemand": "3.6480000000",
     "vcpu": "48",
@@ -236,8 +308,8 @@
     "priceOnDemand": "4.8640000000",
     "vcpu": "64",
     "memory": "512 GiB",
-    "price3yr": "0.0000000000",
-    "price1yr": "0.0000000000"
+    "price3yr": "48063",
+    "price1yr": "25054"
   },
   {
     "type": "r5.24xlarge",
@@ -301,7 +373,7 @@
     "vcpu": "8",
     "memory": "64 GiB",
     "price3yr": "6877",
-    "price1yr": "0.0000000000"
+    "price1yr": "3585"
   },
   {
     "type": "r5d.4xlarge",
@@ -317,7 +389,7 @@
     "vcpu": "32",
     "memory": "256 GiB",
     "price3yr": "27509",
-    "price1yr": "0.0000000000"
+    "price1yr": "14340"
   },
   {
     "type": "r5d.metal",
@@ -325,14 +397,14 @@
     "vcpu": "96",
     "memory": "768 GiB",
     "price1yr": "43020",
-    "price3yr": "0.0000000000"
+    "price3yr": "82528"
   },
   {
     "type": "r5d.xlarge",
     "priceOnDemand": "0.3480000000",
     "vcpu": "4",
     "memory": "32 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "1793",
     "price3yr": "3439"
   },
   {
@@ -348,7 +420,7 @@
     "priceOnDemand": "0.3040000000",
     "vcpu": "4",
     "memory": "32 GiB",
-    "price3yr": "0.0000000000",
+    "price3yr": "3004",
     "price1yr": "1566"
   },
   {
@@ -365,14 +437,14 @@
     "vcpu": "96",
     "memory": "1536 GiB",
     "price3yr": "106427",
-    "price1yr": "0.0000000000"
+    "price1yr": "72974"
   },
   {
     "type": "x2idn.32xlarge",
     "priceOnDemand": "19.3410000000",
     "vcpu": "128",
     "memory": "2048 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "97299",
     "price3yr": "141902"
   },
   {
@@ -396,15 +468,15 @@
     "priceOnDemand": "29.0115000000",
     "vcpu": "96",
     "memory": "3072 GiB",
-    "price1yr": "0.0000000000",
-    "price3yr": "0.0000000000"
+    "price1yr": "145948",
+    "price3yr": "212853"
   },
   {
     "type": "x2iedn.2xlarge",
     "priceOnDemand": "2.4176300000",
     "vcpu": "8",
     "memory": "256 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "12162",
     "price3yr": "17738"
   },
   {
@@ -420,8 +492,8 @@
     "priceOnDemand": "4.8352500000",
     "vcpu": "16",
     "memory": "512 GiB",
-    "price1yr": "0.0000000000",
-    "price3yr": "0.0000000000"
+    "price1yr": "24325",
+    "price3yr": "35476"
   },
   {
     "type": "x2iedn.8xlarge",
@@ -452,7 +524,7 @@
     "priceOnDemand": "4.4640000000",
     "vcpu": "72",
     "memory": "192 GiB",
-    "price3yr": "0.0000000000",
+    "price3yr": "39798",
     "price1yr": "22994"
   },
   {
@@ -476,7 +548,7 @@
     "priceOnDemand": "2.2320000000",
     "vcpu": "36",
     "memory": "96 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "11497",
     "price3yr": "19899"
   },
   {
@@ -485,7 +557,7 @@
     "vcpu": "4",
     "memory": "10.5 GiB",
     "price1yr": "1277",
-    "price3yr": "0.0000000000"
+    "price3yr": "2211"
   },
   {
     "type": "i3.16xlarge",
@@ -509,7 +581,7 @@
     "vcpu": "16",
     "memory": "122 GiB",
     "price3yr": "16601",
-    "price1yr": "0.0000000000"
+    "price1yr": "8379"
   },
   {
     "type": "i3.8xlarge",
@@ -556,7 +628,7 @@
     "priceOnDemand": "3.2520000000",
     "vcpu": "24",
     "memory": "192 GiB",
-    "price3yr": "0.0000000000",
+    "price3yr": "32379",
     "price1yr": "18182"
   },
   {
@@ -604,7 +676,7 @@
     "priceOnDemand": "6.7680000000",
     "vcpu": "96",
     "memory": "384 GiB",
-    "price1yr": "0.0000000000",
+    "price1yr": "34861",
     "price3yr": "66877"
   },
   {

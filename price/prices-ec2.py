@@ -82,8 +82,13 @@ def get_ec2_products(ec2_type, region_name):
             continue 
         if reservedProducts[key]['termAttributes']['OfferingClass'] != 'standard':
             continue
+
+        priceDimensions = reservedProducts[key]['priceDimensions'].values()
         
-        product['price' + reservedProducts[key]['termAttributes']['LeaseContractLength']] = (list(list(reservedProducts[key].values())[0].values())[0]['pricePerUnit']['USD'])
+        for priceDim in list(priceDimensions):
+            if (priceDim['unit'] == 'Quantity'):
+                product['price' + reservedProducts[key]['termAttributes']['LeaseContractLength']] = priceDim['pricePerUnit']['USD']
+
     
     return product
 
