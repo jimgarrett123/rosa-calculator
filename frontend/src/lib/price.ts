@@ -1,8 +1,9 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
+export type EC2InstancePrices = Record<string, { price: number; vcpu: number }>;
 
-export function getEC2Prices(rawPrices) {
-  const prices = {};
+export function getEC2Prices(rawPrices: any) {
+  const prices: EC2InstancePrices = {};
 
   for (const price of rawPrices) {
     const key = Object.keys(price);
@@ -14,7 +15,7 @@ export function getEC2Prices(rawPrices) {
   return prices;
 }
 
-export function getEbsPrice(storageAmount, prices) {
+export function getEbsPrice(storageAmount: number, prices: any) {
   // 3,000 iops / 300 GB = 10.00 IOPS to GB ratio (gp3)
   // 125 MBps / 3,000 iops = 0.04 IOPS to Throughput ratio
   // 1 volumes x 730 instance hours = 730.00 total instance hours

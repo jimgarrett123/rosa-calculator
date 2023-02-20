@@ -12,5 +12,5 @@
     "esModuleInterop": true,
     "resolveJsonModule": true
   },
-  "include": ["**/*.ts", "**/*.tsx", "src/lib/price.js", "src/lib/index.js"]
+  "include": ["**/*.ts", "**/*.tsx", "src/lib/price.ts", "src/lib/index.ts", "src/index.js", "src/App.js"]
 }

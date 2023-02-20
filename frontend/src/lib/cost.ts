@@ -4,7 +4,111 @@ import { getEbsPrice } from './price';
 
 const HOURS_PER_MONTH = 730;
 
-export function getEstimate(workerNodes, infraNodesCount, ec2Prices, ebsPrices) {
+export type Estimate = {
+  estimate: {
+    controlPlane: {
+      description: any;
+      onDemand: {
+        monthly: any;
+        annually: any;
+      };
+      '1year': {
+        monthly: any;
+        annually: any;
+      };
+      '3year': {
+        monthly: any;
+        annually: any;
+      };
+    };
+    infra: {
+      description: any;
+      onDemand: {
+        monthly: any;
+        annually: any;
+      };
+      '1year': {
+        monthly: any;
+        annually: any;
+      };
+      '3year': {
+        monthly: any;
+        annually: any;
+      };
+    };
+    workers: {
+      description: any;
+      onDemand: {
+        monthly: any;
+        annually: any;
+      };
+      '1year': {
+        monthly: any;
+        annually: any;
+      };
+      '3year': {
+        monthly: any;
+        annually: any;
+      };
+    };
+    storageWorkers: {
+      description: any;
+      monthly: any;
+      annually: any;
+    };
+    storageInfra: {
+      description: any;
+      monthly: any;
+      annually: any;
+    };
+    storageControlPlane: {
+      description: any;
+      monthly: any;
+      annually: any;
+    };
+    redHatClusterFees: {
+      description: any;
+      monthly: any;
+      annually: any;
+    };
+    redHatDataplaneFees: {
+      description: any;
+      onDemand: {
+        monthly: any;
+        annually: any;
+      };
+      '1year': {
+        monthly: any;
+        annually: any;
+      };
+      '3year': {
+        monthly: any;
+        annually: any;
+      };
+    };
+  };
+  estimateTotal: {
+    onDemand: {
+      monthly: any;
+      annual: any;
+    };
+    oneYear: {
+      monthly: any;
+      annually: any;
+    };
+    threeYear: {
+      monthly: any;
+      annually: any;
+    };
+  };
+};
+
+export function getEstimate(
+  workerNodes: WorkerNode[],
+  infraNodesCount: number,
+  ec2Prices: EC2[],
+  ebsPrices: any
+): Estimate {
   let ec2OnDemandMonthlyCost = 0;
   let ec21yearMonthlyCost = 0;
   let ec23yearMonthlyCost = 0;
@@ -222,7 +326,30 @@ export function getEstimate(workerNodes, infraNodesCount, ec2Prices, ebsPrices) 
   };
 }
 
-export function getWorkerNodes(nodesConfig, ec2s) {
+export type WorkerNode = {
+  ec2Type: string;
+  ec2PriceHour: number;
+  ec2Price1y: number;
+  ec2Price3y: number;
+  rhOnDemandPriceHour: number;
+  rh1yearPriceHour: number;
+  rh3yearPriceHour: number;
+};
+
+type EC2 = {
+  type: string;
+  priceOnDemand: string;
+  vcpu: string;
+  memory: string;
+  price1yr: string;
+  price3yr: string;
+};
+
+type Error = {
+  error: string;
+};
+
+export function getWorkerNodes(nodesConfig: any, ec2s: EC2[]): WorkerNode[] | Error {
   if (nodesConfig.length < 2) {
     return {
       error: 'No EC2 instances added',
@@ -238,7 +365,7 @@ export function getWorkerNodes(nodesConfig, ec2s) {
   const workerFees1year = 1000 / 12 / HOURS_PER_MONTH;
   const workerFees3year = 667 / 12 / HOURS_PER_MONTH;
 
-  const nodes = [];
+  const nodes: any[] = [];
   for (const row of nodesConfig) {
     const ec2Type = row[0];
     const ec2 = (ec2s || []).find(ec2 => ec2.type === ec2Type);

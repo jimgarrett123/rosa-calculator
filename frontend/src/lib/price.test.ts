@@ -1,7 +1,7 @@
 // Copyright Amazon.com, Inc. or its affiliates. All Rights Reserved.
 // SPDX-License-Identifier: MIT-0
 import { describe, expect, test } from '@jest/globals';
-import { getEbsPrice, getEC2Prices } from '../src/lib/price';
+import { getEbsPrice, getEC2Prices } from './price';
 
 describe('get ec2 price', () => {
   test('returns price and vcpu', () => {
@@ -12,16 +12,16 @@ describe('get ec2 price', () => {
         { 'g4dn.2xlarge': '0.8350000000', vcpu: '8', memory: '32 GiB' },
       ])
     ).toMatchInlineSnapshot(`
-{
-  "g4dn.12xlarge": {
+Object {
+  "g4dn.12xlarge": Object {
     "price": 4.343,
     "vcpu": 48,
   },
-  "g4dn.16xlarge": {
+  "g4dn.16xlarge": Object {
     "price": 4.832,
     "vcpu": 64,
   },
-  "g4dn.2xlarge": {
+  "g4dn.2xlarge": Object {
     "price": 0.835,
     "vcpu": 8,
   },
