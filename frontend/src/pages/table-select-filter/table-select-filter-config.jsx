@@ -112,7 +112,7 @@ export const VISIBLE_CONTENT_OPTIONS = [
 ];
 
 export const PAGE_SIZE_OPTIONS = [
-  { value: 5, label: '5 Instances' },
   { value: 10, label: '10 Instances' },
   { value: 30, label: '30 Instances' },
+  { value: 50, label: '50 Instances' },
 ];
