@@ -29,7 +29,7 @@ bash run.sh
 ...
 ```
 
-#### Option 2: retrieve prices for a given region,  EC2 instance types or for EBS volumes
+### Option 2: retrieve prices for a given region,  EC2 instance types or for EBS volumes
 
 Prerequisites: python3
 
