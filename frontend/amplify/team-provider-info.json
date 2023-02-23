@@ -40,6 +40,9 @@
       },
       "auth": {
         "calculator04a695f9": {}
+      },
+      "analytics": {
+        "calculator": {}
       }
     }
   }

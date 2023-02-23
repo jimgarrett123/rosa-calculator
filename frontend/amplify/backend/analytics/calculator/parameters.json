@@ -1,0 +1,21 @@
+{
+    "appName": "calculator",
+    "roleName": "pinpointLambdaRole9126824e",
+    "cloudformationPolicyName": "cloudformationPolicy9126824e",
+    "cloudWatchPolicyName": "cloudWatchPolicy9126824e",
+    "pinpointPolicyName": "pinpointPolicy9126824e",
+    "authPolicyName": "pinpoint_amplify_9126824e",
+    "unauthPolicyName": "pinpoint_amplify_9126824e",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}

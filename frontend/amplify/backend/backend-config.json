@@ -1,4 +1,10 @@
 {
+  "analytics": {
+    "calculator": {
+      "providerPlugin": "awscloudformation",
+      "service": "Pinpoint"
+    }
+  },
   "auth": {
     "calculator04a695f9": {
       "customAuth": false,
