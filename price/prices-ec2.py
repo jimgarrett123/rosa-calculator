@@ -15,6 +15,9 @@ def get_region_full_name(region_code):
 
 
 def get_ec2_products(ec2_type, region_name):
+#    print("ec2_type = " + ec2_type)
+#    print("region_name = " + region_name)
+
     paginator = client.get_paginator('get_products')
 
     response_iterator = paginator.paginate(
@@ -62,6 +65,10 @@ def get_ec2_products(ec2_type, region_name):
             priceItemJson = json.loads(priceItem)
             products.append(priceItemJson)
 
+    p_length = len(products) 
+    if  p_length == 0:
+        return products
+
     vcpu = products[0]['product']['attributes']['vcpu']
     memory = products[0]['product']['attributes']['memory']
 
@@ -77,6 +84,7 @@ def get_ec2_products(ec2_type, region_name):
     }
 
     reservedProducts = products[0]['terms']['Reserved']
+#    print(json.dumps(reservedProducts))
     for key in reservedProducts.keys():
         if reservedProducts[key]['termAttributes']['PurchaseOption'] != 'All Upfront':
             continue 
@@ -89,11 +97,10 @@ def get_ec2_products(ec2_type, region_name):
             if (priceDim['unit'] == 'Quantity'):
                 product['price' + reservedProducts[key]['termAttributes']['LeaseContractLength']] = priceDim['pricePerUnit']['USD']
 
-    
+#    print(product)
     return product
 
 if __name__ == '__main__':
-
     arg_ec2_types = ""
     arg_region_code = ""
     arg_ec2_plan = ""
@@ -124,8 +131,23 @@ if __name__ == '__main__':
         for ec2_type in ec2_types:
             try:
                 product = get_ec2_products(ec2_type, region_name)
-                results.append(product)
+                if len(product) != 0:
+                    type = product["type"]
+                    priceOnDemand = product["priceOnDemand"] 
+                    price1yr = int(product["price1yr"])
+                    price1yrHourly = price1yr/8760
+                    price3yr = int(product["price3yr"])
+                    price3yrHourly = price3yr/3/8760
+                    cpu = int(product["vcpu"])
+                    memory = product["memory"]
+#                    print(type)
+#                    print(price1yrHourly)
+#                    print(price3yrHourly)
+                    sql = "insert into instances (instance, instanceType, region, operatingSystem, ondemandprice, std_1yr_nuri_effhourly, std_3yr_auri_effhourly, cpu, memory) values ('" + region_name + "_" + type + "_" + "Linux'," + "'" + type + "'," + "'" + region_name + "'," + "'Linux'," + str(priceOnDemand) + "," + str(price1yrHourly) + "," + str(price3yrHourly) + "," + str(cpu) + ",'" + memory + "');"
+#                    results.append(product)
+                    print(sql)
             except:
+                traceback._exc()
                 error_file.write("[error] " + ec2_type + '/' + region_name + '\n') 
 
-        print(json.dumps(results))
+#        print(json.dumps(results))
