@@ -41,26 +41,47 @@ OUT_FILE="out/ec2.sql"
 #rm ${OUT_FI
 get_ebs_price
 
-#get_price "us-east-1" "${ROSA_EC2_TYPES}"
-#get_price "us-east-2"  "${ROSA_EC2_TYPES}"
-#get_price "us-west-1"  "${ROSA_EC2_TYPES}"
-#get_price "us-west-2"  "${ROSA_EC2_TYPES}"
-#get_price "us-gov-west-1"  "${ROSA_EC2_TYPES}"
-#get_price "us-gov-east-1"  "${ROSA_EC2_TYPES}"
-#get_price "ca-central-1"  "${ROSA_EC2_TYPES}"
-#get_price "eu-north-1"  "${ROSA_EC2_TYPES}"
+echo us-east-1
+get_price "us-east-1" "${ROSA_EC2_TYPES}"
+echo us-east-2
+get_price "us-east-2"  "${ROSA_EC2_TYPES}"
+echo us-west-1
+get_price "us-west-1"  "${ROSA_EC2_TYPES}"
+echo us-west-2
+get_price "us-west-2"  "${ROSA_EC2_TYPES}"
+echo us-gov-west-1
+get_price "us-gov-west-1"  "${ROSA_EC2_TYPES}"
+echo us-gov-east-1
+get_price "us-gov-east-1"  "${ROSA_EC2_TYPES}"
+echo us-central-1
+get_price "ca-central-1"  "${ROSA_EC2_TYPES}"
+echo eu-north-1
+get_price "eu-north-1"  "${ROSA_EC2_TYPES}"
+echo eu-west-1
 get_price "eu-west-1"  "${ROSA_EC2_TYPES}"
+echo eu-west-2
 get_price "eu-west-2"  "${ROSA_EC2_TYPES}"
+echo eu-west-3
 get_price "eu-west-3"  "${ROSA_EC2_TYPES}"
+echo eu-central-1
 get_price "eu-central-1"  "${ROSA_EC2_TYPES}"
+echo eu-south-1
 get_price "eu-south-1"  "${ROSA_EC2_TYPES}"
+echo af-south-1
 get_price "af-south-1"  "${ROSA_EC2_TYPES}"
+echo ap-northeast-1
 get_price "ap-northeast-1"  "${ROSA_EC2_TYPES}"
+echo ap-northeast02
 get_price "ap-northeast-2"  "${ROSA_EC2_TYPES}"
+echo ap-northeast-3
 get_price "ap-northeast-3"  "${ROSA_EC2_TYPES}"
+echo ap-sourheast-1
 get_price "ap-southeast-1"  "${ROSA_EC2_TYPES}"
+echo ap-southeast-2
 get_price "ap-southeast-2"  "${ROSA_EC2_TYPES}"
+echo ap-southeast-3
 get_price "ap-southeast-3"  "${ROSA_EC2_TYPES}"
+echo ap-east-1
 get_price "ap-east-1"  "${ROSA_EC2_TYPES}"
 #get_price "me-south-1"  "${ROSA_EC2_TYPES}"
 #get_price "cn-north-1"  "${ROSA_EC2_TYPES}"

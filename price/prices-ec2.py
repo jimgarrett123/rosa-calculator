@@ -63,6 +63,7 @@ def get_ec2_products(ec2_type, region_name):
     for response in response_iterator:
         for priceItem in response["PriceList"]:
             priceItemJson = json.loads(priceItem)
+            # print(priceItemJson)
             products.append(priceItemJson)
 
     p_length = len(products) 
@@ -97,7 +98,7 @@ def get_ec2_products(ec2_type, region_name):
             if (priceDim['unit'] == 'Quantity'):
                 product['price' + reservedProducts[key]['termAttributes']['LeaseContractLength']] = priceDim['pricePerUnit']['USD']
 
-#    print(product)
+    # print(product)
     return product
 
 if __name__ == '__main__':
@@ -147,7 +148,7 @@ if __name__ == '__main__':
 #                    results.append(product)
                     print(sql)
             except:
-                traceback._exc()
+                # traceback._exc()
                 error_file.write("[error] " + ec2_type + '/' + region_name + '\n') 
 
 #        print(json.dumps(results))
