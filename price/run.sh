@@ -38,7 +38,7 @@ ROSA_EC2_TYPES_DATA=$(cat data/rosa-ec2.json)
 ROSA_EC2_TYPES=$(join_by "," $ROSA_EC2_TYPES_DATA)
 OUT_FILE="out/ec2.sql"  
 #touch ${OUT_FILE}
-#rm ${OUT_FI
+#rm ${OUT_FILE}
 get_ebs_price
 
 echo us-east-1
