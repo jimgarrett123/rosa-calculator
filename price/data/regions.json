@@ -71,7 +71,7 @@
         ]
     },
     {
-        "name": "Canada",
+        "name": "Central",
         "full_name": "Canada (Central)",
         "code": "ca-central-1",
         "public": true,
@@ -293,6 +293,29 @@
             "cn-northwest-1a",
             "cn-northwest-1b",
             "cn-northwest-1c"
+        ]
+    },
+    {
+        "name": "Mexico",
+        "full_name": "Mexico (Central)",
+        "code": "mx-central-1",
+        "public": false,
+        "zones": [
+            "mx-central-1a",
+            "mx-central-1b",
+            "mx-central-1c"
+        ]
+    },
+    {
+        "name": "Calgary",
+        "full_name": "Canada (Calgary)",
+        "code": "ca-west-1",
+        "public": false,
+        "zones": [
+            "ca-west-1a",
+            "ca-west-1b",
+            "ca-west-1c",
+            "ca-west-1d"
         ]
     }
 ]
