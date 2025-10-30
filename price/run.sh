@@ -41,6 +41,10 @@ OUT_FILE="out/ec2.sql"
 #rm ${OUT_FILE}
 get_ebs_price
 
+echo mx-central-1
+get_price "mx-central-1"  "${ROSA_EC2_TYPES}"
+echo ca-west-1
+get_price "ca-west-1"  "${ROSA_EC2_TYPES}"
 echo us-east-1
 get_price "us-east-1" "${ROSA_EC2_TYPES}"
 echo us-east-2
